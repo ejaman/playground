@@ -1,135 +1,25 @@
-# Turborepo starter
+**[진행 완료 (Done)]**
 
-This Turborepo starter is maintained by the Turborepo core team.
+* **Turborepo 인프라**: 모노레포 구조 세팅 및 `apps/blog/web` 패키지 구성
+* **배포 파이프라인**: Vercel을 통한 자동 배포 환경 구축 및 경로 이슈 해결
+* **포스팅 아키텍처**: Contentlayer 연동 및 마크다운 기반의 동적 렌더링 뼈대 구축
+* **AI 타이틀링**: AI를 활용한 포스팅 제목 생성 및 슬러그(Slug) 패턴 설계
 
-## Using this example
+**[남은 과제 (Roadmap)]**
+#### 1. GitHub Actions: CI/CD 및 성능 자동화
 
-Run the following command:
+* **AI Agentic Workflow (Self-Healing)**: 단순히 빌드만 하는 게 아니라, 빌드 에러가 나면 AI 에이전트가 에러 로그를 분석해서 수정 제안을 PR 코멘트로 달아주는 워크플로우를 추가
+* **Lighthouse CI & PPR 실험**: **Partial Prerendering(PPR)** 적용 전후의 Lighthouse 점수를 GitHub Actions로 자동 비교하여 기록
 
-```sh
-npx create-turbo@latest
-```
+#### 2. AI Agent 이식: n8n + LangGraph 기반 자동화
 
-## What's inside?
+* **Structured Data Extraction**: n8n에서 수집한 마크다운 데이터를 LangChain의 Pydantic 기능을 활용해 완벽한 JSON으로 추출, 블로그 메타데이터(태그, 시리즈 등)에 바로 꽂아주기
+* **AI 컨트리뷰터 & Self-Correction**: LangGraph를 통해 AI가 직접 쓴 코드 스니펫의 오류를 스스로 검수하고 발행하는 '에이전트 워크플로우'를 이식
 
-This Turborepo includes the following packages/apps:
+#### 3. UI/UX & Deep Dive: 아키텍처 및 최신 패턴
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+* **FSD (Feature-Sliced Design)**: 디렉토리 구조를 `features`, `entities`, `shared` 레이어로 구성
+* **Compound Component Pattern**: 블로그의 공통 UI(Modal, Select 등)를 이 패턴으로 설계
+* **Next.js 15+ 최신 기능**: **Server Actions**와 `useActionState` 훅을 도입해 API 호출 없이 서버 로직을 안전하게 처리 -> 🔺
+* **Zero-Runtime CSS**: Panda CSS 같은 기술을 도입해 런타임 오버헤드 없는 타입 안정 스타일링을 구현
+* **Local-first 경험**: IndexedDB를 활용해 네트워크가 불안정해도 글 작성이 끊기지 않는 오프라인 경험을 추가 -> 🔺

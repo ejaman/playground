@@ -4,19 +4,19 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const getSeriesTitle = (seriesKey: string) => {
-  try {
-    // ESM 환경에서 가장 확실한 경로 계산
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const seriesPath = path.resolve(__dirname, "../series.json");
+  // try {
+  //   // ESM 환경에서 가장 확실한 경로 계산
+  //   const __filename = fileURLToPath(import.meta.url);
+  //   const __dirname = path.dirname(__filename);
+  //   const seriesPath = path.resolve(__dirname, "../series.json");
 
-    if (fs.existsSync(seriesPath)) {
-      const seriesData = JSON.parse(fs.readFileSync(seriesPath, "utf-8"));
-      return seriesData[seriesKey]?.title || seriesKey;
-    }
-  } catch (error) {
-    console.warn("⚠️ 빌드 중 series.json 로드 실패, 기본 키를 사용합니다.");
-  }
+  //   if (fs.existsSync(seriesPath)) {
+  //     const seriesData = JSON.parse(fs.readFileSync(seriesPath, "utf-8"));
+  //     return seriesData[seriesKey]?.title || seriesKey;
+  //   }
+  // } catch (error) {
+  //   console.warn("⚠️ 빌드 중 series.json 로드 실패, 기본 키를 사용합니다.");
+  // }
   return seriesKey; // 에러가 나더라도 빌드가 멈추지 않게 key를 반환
 };
 

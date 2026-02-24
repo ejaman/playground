@@ -4,7 +4,11 @@
 node_modules
 .pnp
 .pnp.js
+
+# Cache
 .pnpm-store/
+.contentlayer/
+.cache/
 
 # Local env files
 .env

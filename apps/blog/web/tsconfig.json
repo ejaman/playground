@@ -1,0 +1,24 @@
+{
+  "extends": "../../../packages/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "moduleResolution": "Bundler", // 이 부분을 추가하여 상속받은 값을 덮어씁니다.
+    "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+  ],
+  "exclude": ["node_modules"]
+}

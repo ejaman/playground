@@ -1,0 +1,30 @@
+{
+  "cacheItemsMap": {
+    "2026-02-24-make-a-lab.md": {
+      "document": {
+        "title": "실험실 만들기",
+        "date": "2026-02-24T00:00:00.000Z",
+        "tags": [],
+        "series": "playground",
+        "body": {
+          "raw": "\n# 실험실 만들기\n\n여기에 내용을 작성하세요!\n",
+          "html": "<h1>실험실 만들기</h1>\n<p>여기에 내용을 작성하세요!</p>"
+        },
+        "_id": "2026-02-24-make-a-lab.md",
+        "_raw": {
+          "sourceFilePath": "2026-02-24-make-a-lab.md",
+          "sourceFileName": "2026-02-24-make-a-lab.md",
+          "sourceFileDir": ".",
+          "contentType": "markdown",
+          "flattenedPath": "2026-02-24-make-a-lab"
+        },
+        "type": "Post",
+        "url": "/posts/2026-02-24-make-a-lab",
+        "seriesTitle": "playground"
+      },
+      "documentHash": "1771911800873",
+      "hasWarnings": false,
+      "documentTypeName": "Post"
+    }
+  }
+}

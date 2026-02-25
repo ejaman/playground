@@ -7,8 +7,8 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "new-post": "node scripts/create-post.mjs",
-    "list-models": "node scripts/list-models.mjs"
+    "create-post": "node scripts/create-post.mjs",
+    "model-list": "node scripts/model-list.mjs"
   },
   "devDependencies": {
     "prettier": "^3.7.4",

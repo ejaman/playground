@@ -1,4 +1,3 @@
-// apps/blog/web/app/posts/[slug]/page.tsx
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 
@@ -7,8 +6,13 @@ export const generateStaticParams = async () =>
   allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
 // 2. 반드시 'export default'가 있어야 에러가 나지 않습니다!
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = allPosts.find((p) => p._raw.flattenedPath === slug);
 
   if (!post) notFound();
 

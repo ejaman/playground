@@ -1,11 +1,10 @@
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
+import PostContent from "../../../src/entities/post/ui/PostContent";
 
-// 1. 빌드 시 각 포스트의 경로를 미리 생성합니다.
 export const generateStaticParams = async () =>
   allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
-// 2. 반드시 'export default'가 있어야 에러가 나지 않습니다!
 export default async function PostPage({
   params,
 }: {
@@ -17,13 +16,12 @@ export default async function PostPage({
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl py-8">
-      <h1 className="text-3xl font-bold">{post.title}</h1>
-      <time className="text-gray-500">{post.date}</time>
-      <div
-        className="mt-8"
-        dangerouslySetInnerHTML={{ __html: post.body.html }}
-      />
-    </article>
+    <PostContent
+      title={post.title}
+      date={post.date}
+      tags={post.tags}
+      series={post.series}
+      html={post.body.html}
+    />
   );
 }

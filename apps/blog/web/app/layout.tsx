@@ -1,5 +1,6 @@
-import "./_shared/lib/fonts";
-import { fonts } from "./_shared/lib/fonts";
+import "../src/shared/lib/fonts";
+import { fonts } from "../src/shared/lib/fonts";
+import "../src/shared/styles/globals.css";
 
 export default function RootLayout({
   children,

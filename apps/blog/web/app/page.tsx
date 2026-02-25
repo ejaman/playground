@@ -8,8 +8,6 @@ export default function BlogPage() {
     compareDesc(parseISO(a.date), parseISO(b.date)),
   );
 
-  console.log(allPosts);
-
   return (
     <div className="max-w-2xl mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8">나의 개발 실험실 🧪</h1>

@@ -23,6 +23,9 @@
   --font-mono: "Geist Mono", ui-monospace, monospace;
 }
 
+/* data-theme="dark"일 때 dark: variant 적용 (수동 다크모드 + prose 등) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* 4. CSS 변수 기반 시스템 (다크모드 대응) */
 :root {
   --background: #ffffff;
@@ -42,6 +45,16 @@
     --accent: #1e293b;
     --border: #1e293b;
   }
+}
+
+/* 수동 다크모드 토글용 data-theme 속성 (시스템 설정과 별도) */
+:root[data-theme="dark"] {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --border: #1e293b;
 }
 
 /* 기본 스타일 초기화 */

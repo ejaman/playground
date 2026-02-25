@@ -1,6 +1,7 @@
 import "../src/shared/lib/fonts";
 import { fonts } from "../src/shared/lib/fonts";
 import "../src/shared/styles/globals.css";
+import { Header } from "../src/shared/ui/Header";
 
 export default function RootLayout({
   children,
@@ -12,7 +13,8 @@ export default function RootLayout({
       <body
         className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   );

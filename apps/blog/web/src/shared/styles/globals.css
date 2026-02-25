@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* 2. 소스 경로 명시 (지민님 폴더 구조 기준) */
 @source "../../**/*.{ts,tsx}";
 @source "../../../app/**/*.{ts,tsx}";
 
@@ -14,6 +13,10 @@
   /* 2. 시멘틱 컬러 (shadcn/ui 스타일 변수 연결) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--foreground);
 
   /* 3. 타이포그래피 */
   --font-sans: var(--pretendard), var(--font-geist-sans), sans-serif;

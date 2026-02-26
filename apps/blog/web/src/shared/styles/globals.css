@@ -81,6 +81,16 @@
     --tw-prose-links: var(--color-brand-primary);
   }
 
+  /* 목차 클릭 시 스크롤 시 제목이 상단에 걸리지 않도록 여백 */
+  .prose h1[id],
+  .prose h2[id],
+  .prose h3[id],
+  .prose h4[id],
+  .prose h5[id],
+  .prose h6[id] {
+    scroll-margin-top: 6rem;
+  }
+
   /* 제목 앵커 링크 (rehype-autolink-headings) */
   .prose .anchor {
     @apply no-underline text-muted-foreground;

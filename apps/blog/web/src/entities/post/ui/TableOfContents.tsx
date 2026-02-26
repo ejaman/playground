@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import type { HeadingItem } from "../../../shared/lib/parseHeadingsFromHtml";
 
@@ -25,6 +25,35 @@ export function TableOfContents({
   variant,
 }: TableOfContentsProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (headings.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort(
+            (a, b) =>
+              (a.boundingClientRect.top ?? 0) - (b.boundingClientRect.top ?? 0)
+          );
+        const first = visible[0];
+        if (first?.target?.id) setActiveId(first.target.id);
+      },
+      {
+        rootMargin: "-80px 0px -70% 0px",
+        threshold: 0,
+      }
+    );
+
+    headings.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [headings]);
 
   if (headings.length === 0) return null;
 
@@ -36,21 +65,29 @@ export function TableOfContents({
 
   const listContent = (
     <ul className="space-y-1.5">
-      {headings.map(({ id, text, level }) => (
-        <li
-          key={id}
-          style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}
-          className="truncate"
-        >
-          <a
-            href={`#${id}`}
-            onClick={(e) => handleClick(e, id)}
-            className="text-muted-foreground hover:text-foreground hover:underline"
+      {headings.map(({ id, text, level }) => {
+        const isActive = id === activeId;
+        return (
+          <li
+            key={id}
+            style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}
+            className="truncate"
           >
-            {text}
-          </a>
-        </li>
-      ))}
+            <a
+              href={`#${id}`}
+              onClick={(e) => handleClick(e, id)}
+              className={`transition-colors hover:underline ${
+                isActive
+                  ? "font-semibold text-foreground text-[0.9375rem]"
+                  : "text-muted-foreground hover:text-foreground text-sm"
+              }`}
+              aria-current={isActive ? "location" : undefined}
+            >
+              {text}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 

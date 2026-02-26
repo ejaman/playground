@@ -28,4 +28,4 @@ async function modelList() {
   }
 }
 
-listModels();
+modelList();

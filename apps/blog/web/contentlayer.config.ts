@@ -2,6 +2,10 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypePrettyCode from "rehype-pretty-code";
 
 const getSeriesTitle = (seriesKey: string) => {
   try {
@@ -45,6 +49,21 @@ export const Post = defineDocumentType(() => ({
 const sourceConfig: ReturnType<typeof makeSource> = makeSource({
   contentDirPath: "../posts",
   documentTypes: [Post],
+  markdown: {
+    // rehype와 contentlayer의 unified/vfile 버전 차이로 타입 단언 필요
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { properties: { className: ["anchor"] } }],
+      rehypeCodeTitles,
+      [
+        rehypePrettyCode,
+        {
+          theme: "github-dark-dimmed",
+          keepBackground: false,
+        },
+      ],
+    ] as any,
+  },
 });
 
 export default sourceConfig;

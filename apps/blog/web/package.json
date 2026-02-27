@@ -11,11 +11,9 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
+    "@playground/ui": "workspace:*",
     "contentlayer": "^0.3.4",
-    "date-fns": "^4.1.0",
     "geist": "^1.7.0",
-    "lucide-react": "^0.575.0",
     "next": "16.1.5",
     "next-contentlayer": "^0.3.4",
     "react": "^19.2.0",

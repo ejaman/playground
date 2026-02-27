@@ -27,21 +27,15 @@ importers:
 
   apps/blog/web:
     dependencies:
-      '@repo/ui':
+      '@playground/ui':
         specifier: workspace:*
         version: link:../../../packages/ui
       contentlayer:
         specifier: ^0.3.4
         version: 0.3.4(esbuild@0.18.20)
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
       geist:
         specifier: ^1.7.0
         version: 1.7.0(next@16.1.5(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
-      lucide-react:
-        specifier: ^0.575.0
-        version: 0.575.0(react@19.2.0)
       next:
         specifier: 16.1.5
         version: 16.1.5(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -165,6 +159,12 @@ importers:
 
   packages/ui:
     dependencies:
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      lucide-react:
+        specifier: ^0.575.0
+        version: 0.575.0(react@19.2.0)
       react:
         specifier: ^19.2.0
         version: 19.2.0

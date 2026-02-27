@@ -6,7 +6,6 @@ export default function BlogPage() {
   const allPosts = publishedPosts.sort((a, b) =>
     compareDesc(parseISO(a.date), parseISO(b.date)),
   );
-  console.log(publishedPosts);
 
   return (
     <div className="max-w-2xl mx-auto py-8">

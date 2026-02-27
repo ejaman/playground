@@ -1,10 +1,10 @@
-import { posts } from "#site/content";
 import { notFound } from "next/navigation";
 import PostContent from "../../../src/entities/post/ui/PostContent";
 import { parseHeadingsFromHtml } from "../../../src/shared/lib/parseHeadingsFromHtml";
+import { publishedPosts } from "../../../src/entities/post/lib/posts";
 
 export const generateStaticParams = async () =>
-  posts.map((post) => ({ slug: post.id }));
+  publishedPosts.map((post) => ({ slug: post.id }));
 
 export default async function PostPage({
   params,
@@ -12,7 +12,7 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = posts.find((p) => p.id === slug);
+  const post = publishedPosts.find((p) => p.id === slug);
 
   if (!post) notFound();
 

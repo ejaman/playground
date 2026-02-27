@@ -1,8 +1,9 @@
 ---
-title: "1. 플레이그라운드 만들기"
+title: "1. 개인 블로그 시작"
 date: "2026-02-26"
 tags: ["playground", "architecture", "side-project"]
 series: "playground"
+published: true
 ---
 
 # 플레이그라운드 만들기

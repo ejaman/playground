@@ -72,7 +72,7 @@ title: "${title}"
 date: "${date}"
 tags: []
 series: ${selectedKey ? `"${selectedKey}"` : "null"}
-publish: true
+publish: false
 ---
 
 # ${title}

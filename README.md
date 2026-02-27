@@ -6,20 +6,22 @@
 * **AI 타이틀링**: AI를 활용한 포스팅 제목 생성 및 슬러그(Slug) 패턴 설계
 
 **[남은 과제 (Roadmap)]**
-#### 1. GitHub Actions: CI/CD 및 성능 자동화
+1. AI Self-Healing CI 
+빌드 에러 자동 분석: GitHub Actions에서 빌드 실패 시 에러 로그를 AI에 전달, 수정 제안을 PR 코멘트로 자동 게시
+워크플로우 설계 문서화: 단순 구현에 그치지 않고 프롬프트 설계 근거와 한계점을 블로그 포스팅으로 기록
 
-* **AI Agentic Workflow (Self-Healing)**: 단순히 빌드만 하는 게 아니라, 빌드 에러가 나면 AI 에이전트가 에러 로그를 분석해서 수정 제안을 PR 코멘트로 달아주는 워크플로우를 추가
-* **Lighthouse CI & PPR 실험**: **Partial Prerendering(PPR)** 적용 전후의 Lighthouse 점수를 GitHub Actions로 자동 비교하여 기록
+2. PPR + Lighthouse 성능 자동화
+Partial Prerendering 적용: Next.js 15+ PPR 실험적 적용
+Lighthouse CI 자동 비교: 적용 전후 LCP, TBT 등 Core Web Vitals 수치를 GitHub Actions로 자동 기록 및 시각화
+성과 포스팅: "PPR 적용 후 LCP X초 개선" 형태로 수치 기반 회고 작성
 
-#### 2. AI Agent 이식: n8n + LangGraph 기반 자동화
+3. FSD 아키텍처 + UI 패턴 (설명할 수 있는 구조)
+레이어 설계: features, entities, shared 경계를 왜 이렇게 그었는지 근거와 함께 구현
+Compound Component Pattern: Modal, Select 등 공통 UI를 이 패턴으로 설계, 트레이드오프 정리
+Zero-Runtime CSS: Panda CSS 도입, 기존 방식 대비 번들 사이즈 비교
+FSD 실전 적용 포스팅: 국내 사례가 드문 만큼 블로그 콘텐츠 자체가 포트폴리오
 
-* **Structured Data Extraction**: n8n에서 수집한 마크다운 데이터를 LangChain의 Pydantic 기능을 활용해 완벽한 JSON으로 추출, 블로그 메타데이터(태그, 시리즈 등)에 바로 꽂아주기
-* **AI 컨트리뷰터 & Self-Correction**: LangGraph를 통해 AI가 직접 쓴 코드 스니펫의 오류를 스스로 검수하고 발행하는 '에이전트 워크플로우'를 이식
+4. 나중에(매우 후순위)
 
-#### 3. UI/UX & Deep Dive: 아키텍처 및 최신 패턴
-
-* **FSD (Feature-Sliced Design)**: 디렉토리 구조를 `features`, `entities`, `shared` 레이어로 구성
-* **Compound Component Pattern**: 블로그의 공통 UI(Modal, Select 등)를 이 패턴으로 설계
-* **Next.js 15+ 최신 기능**: **Server Actions**와 `useActionState` 훅을 도입해 API 호출 없이 서버 로직을 안전하게 처리 -> 🔺
-* **Zero-Runtime CSS**: Panda CSS 같은 기술을 도입해 런타임 오버헤드 없는 타입 안정 스타일링을 구현
-* **Local-first 경험**: IndexedDB를 활용해 네트워크가 불안정해도 글 작성이 끊기지 않는 오프라인 경험을 추가 -> 🔺
+n8n + LangGraph 자동화: 마크다운 메타데이터 추출 및 AI 컨트리뷰터 워크플로우
+Local-first 경험: IndexedDB 기반 오프라인 글 작성 — 블로그 도메인에서 왜 필요한지 먼저 정의하고 시작

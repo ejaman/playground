@@ -1,4 +1,4 @@
-import { Post } from "contentlayer/generated";
+import { type Post } from "#site/content";
 import type { HeadingItem } from "../../../shared/lib/parseHeadingsFromHtml";
 import { PostBody } from "./PostBody";
 import { PostHeader } from "./PostHeader";

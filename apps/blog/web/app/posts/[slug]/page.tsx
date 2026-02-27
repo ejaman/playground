@@ -1,10 +1,10 @@
-import { allPosts } from "contentlayer/generated";
+import { posts } from "#site/content";
 import { notFound } from "next/navigation";
 import PostContent from "../../../src/entities/post/ui/PostContent";
 import { parseHeadingsFromHtml } from "../../../src/shared/lib/parseHeadingsFromHtml";
 
 export const generateStaticParams = async () =>
-  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
+  posts.map((post) => ({ slug: post.id }));
 
 export default async function PostPage({
   params,
@@ -12,11 +12,11 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = allPosts.find((p) => p._raw.flattenedPath === slug);
+  const post = posts.find((p) => p.id === slug);
 
   if (!post) notFound();
 
-  const headings = parseHeadingsFromHtml(post.body.html);
+  const headings = parseHeadingsFromHtml(post.body);
 
   return (
     <PostContent
@@ -24,7 +24,7 @@ export default async function PostPage({
       date={post.date}
       tags={post.tags}
       series={post.series}
-      html={post.body.html}
+      html={post.body}
       headings={headings}
     />
   );

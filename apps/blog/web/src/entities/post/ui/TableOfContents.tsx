@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+// import { ChevronDown } from "lucide-react";
 import type { HeadingItem } from "../../../shared/lib/parseHeadingsFromHtml";
 
 const variantClasses = {
@@ -36,7 +36,7 @@ export function TableOfContents({
           .filter((e) => e.isIntersecting)
           .sort(
             (a, b) =>
-              (a.boundingClientRect.top ?? 0) - (b.boundingClientRect.top ?? 0)
+              (a.boundingClientRect.top ?? 0) - (b.boundingClientRect.top ?? 0),
           );
         const first = visible[0];
         if (first?.target?.id) setActiveId(first.target.id);
@@ -44,7 +44,7 @@ export function TableOfContents({
       {
         rootMargin: "-80px 0px -70% 0px",
         threshold: 0,
-      }
+      },
     );
 
     headings.forEach(({ id }) => {
@@ -101,11 +101,11 @@ export function TableOfContents({
           aria-expanded={isOpen}
         >
           <span>목차</span>
-          <ChevronDown
+          {/* <ChevronDown
             className="size-5 shrink-0 text-muted-foreground transition-transform"
             style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
             aria-hidden
-          />
+          /> */}
         </button>
         {isOpen && (
           <div className="max-h-40 overflow-y-auto border-t border-border px-4 py-3">

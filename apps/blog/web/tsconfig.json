@@ -3,7 +3,7 @@
   "compilerOptions": {
     "moduleResolution": "Bundler", // 이 부분을 추가하여 상속받은 값을 덮어씁니다.
     "paths": {
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "#site/content": ["./.velite"]
     },
     "plugins": [
       {
@@ -16,9 +16,10 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    "next.config.js",
+    "next.config.ts",
     ".next/types/**/*.ts",
-    ".contentlayer/generated"
+    ".velite"
   ],
-  "exclude": ["node_modules"]
+
+  "exclude": ["node_modules", "velite.config.ts"]
 }

@@ -7,8 +7,9 @@ node_modules
 
 # Cache
 .pnpm-store/
-.contentlayer/
 .cache/
+.velite/
+.contentlayer/
 
 # Local env files
 .env

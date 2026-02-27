@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { Post } from "contentlayer/generated";
+import { type Post } from "#site/content";
 
 export default function PostCard(post: Post) {
   return (

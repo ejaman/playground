@@ -1,10 +1,10 @@
-import { allPosts } from "contentlayer/generated"; // 생성된 폴더에서 데이터 임포트
+import { posts } from "#site/content"; // 생성된 폴더에서 데이터 임포트
 import { compareDesc, parseISO } from "date-fns"; // 날짜 정렬용 (설치 필요: pnpm add date-fns)
 import PostCard from "../src/entities/post/ui/PostCard";
 
 export default function BlogPage() {
   // 최신순으로 글 정렬
-  const posts = allPosts.sort((a, b) =>
+  const allPosts = posts.sort((a, b) =>
     compareDesc(parseISO(a.date), parseISO(b.date)),
   );
 
@@ -13,8 +13,8 @@ export default function BlogPage() {
       <h1 className="text-3xl font-bold mb-8">🐾 개발 실험실</h1>
 
       <div className="space-y-6">
-        {posts.map((post) => (
-          <PostCard key={post._id} {...post} />
+        {allPosts.map((post) => (
+          <PostCard key={post.id} {...post} />
         ))}
       </div>
     </div>

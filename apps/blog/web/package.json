@@ -4,26 +4,24 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "contentlayer dev & next dev --port 3000",
-    "build": "contentlayer build && next build",
+    "dev": "next dev --turbopack --port 3000",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint --max-warnings 0",
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@playground/ui": "workspace:*",
-    "contentlayer": "^0.3.4",
     "geist": "^1.7.0",
     "next": "16.1.5",
-    "next-contentlayer": "^0.3.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-code-titles": "^1.2.1",
     "rehype-pretty-code": "^0.14.1",
-    "rehype-prism-plus": "^2.0.2",
     "rehype-slug": "^6.0.0",
-    "shiki": "^3.23.0"
+    "shiki": "^3.23.0",
+    "velite": "^0.3.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

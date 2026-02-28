@@ -52,7 +52,7 @@ const config = defineConfig({
     clean: true,
   },
   collections: { posts },
-  mdx: {
+  markdown: {
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { properties: { className: ["anchor"] } }],

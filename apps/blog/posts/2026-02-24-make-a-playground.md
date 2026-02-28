@@ -1,7 +1,7 @@
 ---
-title: "1. 개인 블로그 시작"
-date: "2026-02-26"
-tags: ["playground", "architecture", "side-project"]
+title: "블로그를 만들어보자"
+date: "2026-02-24"
+tags: ["playground", "architecture", "turbo", "markdown", "FSD", "rehype"]
 series: "playground"
 published: true
 ---

@@ -1,7 +1,7 @@
 ---
-title: "2. md 파일을 데이터로 처리하기"
+title: "MD를 데이터로 처리하기"
 date: "2026-02-27"
-tags: ["velite", "contentlayer", "migration", "playground"]
+tags: ["velite", "contentlayer", "migration", "markdown"]
 series: "playground"
 published: true
 ---
@@ -76,7 +76,7 @@ markdown: {
 }
 
 // Velite
-mdx: {
+markdown: {
   rehypePlugins: [rehypeSlug, rehypePrettyCode],
 }
 ```
@@ -153,7 +153,7 @@ export default defineConfig({
     clean: true,
   },
   collections: { posts },
-  mdx: {
+  markdown: {
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { properties: { className: ["anchor"] } }],

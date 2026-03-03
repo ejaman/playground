@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import PostContent from "../../../src/entities/post/ui/PostContent";
-import { parseHeadingsFromHtml } from "../../../src/shared/lib/parseHeadingsFromHtml";
-import { publishedPosts } from "../../../src/entities/post/lib/posts";
+import PostContent from "@/entities/post/ui/PostContent";
+import { parseHeadingsFromHtml } from "@/shared/lib/parseHeadingsFromHtml";
+import { publishedPosts } from "@/entities/post/lib/posts";
 
 export const generateStaticParams = async () =>
   publishedPosts.map((post) => ({ slug: post.id }));

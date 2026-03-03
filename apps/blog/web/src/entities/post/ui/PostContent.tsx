@@ -1,5 +1,5 @@
 import { type Post } from "#site/content";
-import type { HeadingItem } from "../../../shared/lib/parseHeadingsFromHtml";
+import type { HeadingItem } from "@/shared/lib/parseHeadingsFromHtml";
 import { PostBody } from "./PostBody";
 import { PostHeader } from "./PostHeader";
 import { TableOfContents } from "./TableOfContents";

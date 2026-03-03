@@ -1,6 +1,6 @@
 **[진행 완료 (Done)]**
 
-* **Turborepo 인프라**: 모노레포 구조 세팅 및 `apps/playground/web` 패키지 구성
+* **Turborepo 인프라**: 모노레포 구조 세팅 및 `apps/blog/web` 패키지 구성
 * **배포 파이프라인**: Vercel을 통한 자동 배포 환경 구축 및 경로 이슈 해결
 * **포스팅 아키텍처**: Contentlayer 연동 및 마크다운 기반의 동적 렌더링 뼈대 구축
 * **AI 타이틀링**: AI를 활용한 포스팅 제목 생성 및 슬러그(Slug) 패턴 설계

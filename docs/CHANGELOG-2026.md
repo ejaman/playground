@@ -16,7 +16,7 @@
 
 ### 1.2 UI 패키지 의존성 정리
 
-- **변경**: `packages/ui`에서 `date-fns`, `lucide-react` 제거 → `apps/playground/web`에만 설치.
+- **변경**: `packages/ui`에서 `date-fns`, `lucide-react` 제거 → `apps/blog/web`에만 설치.
 - **이유**: 폰트·유틸은 앱에서만 쓰고, UI 패키지는 순수 컴포넌트만 두기 위함.
 
 ---
@@ -28,12 +28,12 @@
 - `post.tags`가 있으면 날짜·시리즈 아래에 태그 칩(rounded-full, 작은 라벨)으로 표시.
 - 접근성용 `aria-label="태그"` 추가.
 
-### 2.2 blog 폴더명 → playground
+### 2.2 playground 폴더명 → blog
 
-- **경로**: `apps/blog` → `apps/playground` (웹 앱은 `apps/playground/web`, 글은 `apps/playground/posts` 등).
+- **경로**: `apps/playground` → `apps/blog` (웹 앱은 `apps/blog/web`, 글은 `apps/blog/posts` 등).
 - **수정한 곳**
-  - `scripts/create-post.mjs`: `SERIES_PATH`, `POSTS_PATH`를 `./apps/playground/...`로 변경.
-  - `README.md`, `apps/playground/GUIDE.md`, 포스트 md들: 문서 내 `apps/blog` → `apps/playground`.
+  - `scripts/create-post.mjs`: `SERIES_PATH`, `POSTS_PATH`를 `./apps/blog/...`로 변경.
+  - `README.md`, `apps/blog/GUIDE.md`, 포스트 md들: 문서 내 `apps/playground` → `apps/blog`.
   - `pnpm install --no-frozen-lockfile`로 락 반영.
 
 ---
@@ -86,7 +86,7 @@
 
 ### 5.1 구조
 
-- **Blog+Hub**: `apps/playground/web` (단일 Next.js 앱, `/blog`, `/hub`).
+- **Blog+Hub**: `apps/blog/web` (단일 Next.js 앱, `/blog`, `/hub`).
 - **Portfolio**: **`apps/portfolio`** (별도 Next.js 앱).
 
 ### 5.2 추가한 것
@@ -107,7 +107,7 @@
 ### 6.1 앱별 vercel.json
 
 - **루트 `vercel.json` 삭제** (한 루트 설정으로 두 앱을 구분할 수 없음).
-- **`apps/playground/web/vercel.json`**: blog+hub용.
+- **`apps/blog/web/vercel.json`**: blog+hub용.
   - `buildCommand`: `cd ../../.. && pnpm turbo run build --filter=web`
   - `installCommand`: `cd ../../.. && pnpm install`
   - `outputDirectory`: `.next`
@@ -119,7 +119,7 @@
 ### 6.2 Vercel 프로젝트
 
 - **두 개의 Vercel 프로젝트** 사용 권장.
-- 프로젝트 1: Root Directory = **`apps/playground/web`** (Blog+Hub).
+- 프로젝트 1: Root Directory = **`apps/blog/web`** (Blog+Hub).
 - 프로젝트 2: Root Directory = **`apps/portfolio`** (Portfolio).
 - 같은 저장소를 연결한 뒤, 각 프로젝트에서 Root Directory만 위와 같이 설정하면 됨.
 
@@ -129,7 +129,7 @@
 
 | 항목 | 내용 |
 |------|------|
-| 앱 구성 | blog+hub → `apps/playground/web`, portfolio → `apps/portfolio` |
+| 앱 구성 | blog+hub → `apps/blog/web`, portfolio → `apps/portfolio` |
 | 첫 페이지 | `/` → `/blog` 리다이렉트 |
 | FSD | app, shared, entities, features, widgets 레이어 정리, `@/` import |
 | 폰트 | `src/shared/assets/fonts`로 통합 |

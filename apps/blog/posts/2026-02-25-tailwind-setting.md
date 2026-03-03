@@ -36,7 +36,7 @@ series: "playground"
 
 ### 오류 A: `Cannot find module '@tailwindcss/postcss'`
 
-- Turbopack이 PostCSS를 실행할 때 **앱 루트(`apps/playground/web`)가 아닌 다른 경로**에서 모듈을 찾음.
+- Turbopack이 PostCSS를 실행할 때 **앱 루트(`apps/blog/web`)가 아닌 다른 경로**에서 모듈을 찾음.
 - pnpm 워크스페이스에서는 `@tailwindcss/postcss`가 **앱의 `node_modules`** 에만 있어서, 그 경로에서 resolve가 실패함.
 
 ### 오류 B: `Can't resolve '../pkg'` (lightningcss)
@@ -70,7 +70,7 @@ series: "playground"
      - `shared-styles.css`: `@import "tailwindcss"` (필요 시 앱에서 참조).
      - `package.json`: `@tailwindcss/postcss`, `postcss`, `tailwindcss`를 **devDependencies**로 보유.
 
-2. **`apps/playground/web` 수정**
+2. **`apps/blog/web` 수정**
    - **`postcss.config.js`**
      - 직접 플러그인을 나열하지 않고,  
        `import { postcssConfig } from "@repo/tailwind-config/postcss"; export default postcssConfig;` 로 **re-export**만 함.
@@ -119,7 +119,7 @@ series: "playground"
    - Tailwind v4의 **CSS-first 설정**(`@theme`, `@import "tailwindcss"` 등)을 읽어서  
      “정의된 클래스 목록”을 만들고, 그 목록에 없으면 ESLint로 보고하는 플러그인.
 
-2. **`apps/playground/web/eslint.config.js` 수정**
+2. **`apps/blog/web/eslint.config.js` 수정**
    - 플러그인: `eslint-plugin-tailwind-v4`
    - 규칙: `tailwind-v4/no-undefined-classes` → **error**
    - 옵션: `cssFile: "src/shared/styles/globals.css"`  
@@ -145,8 +145,8 @@ series: "playground"
 | 항목                       | 위치 / 내용                                                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | PostCSS 설정 (실제 내용)   | `packages/tailwind-config/postcss.config.js`                                                                  |
-| 앱 PostCSS 진입점          | `apps/playground/web/postcss.config.js` → `@repo/tailwind-config/postcss` re-export                                 |
-| Tailwind 진입 CSS          | `apps/playground/web/src/shared/styles/globals.css` (`@import "tailwindcss"`, `@theme`, `@source`, `@plugin`)       |
+| 앱 PostCSS 진입점          | `apps/blog/web/postcss.config.js` → `@repo/tailwind-config/postcss` re-export                                 |
+| Tailwind 진입 CSS          | `apps/blog/web/src/shared/styles/globals.css` (`@import "tailwindcss"`, `@theme`, `@source`, `@plugin`)       |
 | 테마 색 (border, muted 등) | `globals.css`의 `@theme`에 `--color-border`, `--color-muted`, `--color-muted-foreground`, `--color-ring` 추가 |
 | 클래스 검증 (린트)         | `eslint-plugin-tailwind-v4` + `tailwind-v4/no-undefined-classes`, 기준 CSS: `src/shared/styles/globals.css`   |
 

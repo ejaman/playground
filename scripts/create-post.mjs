@@ -15,8 +15,8 @@ const rl = readline.createInterface({
 const question = (prompt) =>
   new Promise((resolve) => rl.question(prompt, resolve));
 
-const SERIES_PATH = "./apps/playground/series.json";
-const POSTS_PATH = "./apps/playground/posts";
+const SERIES_PATH = "./apps/blog/series.json";
+const POSTS_PATH = "./apps/blog/posts";
 
 // ─── 시리즈 선택 ───────────────────────────────────────────────
 

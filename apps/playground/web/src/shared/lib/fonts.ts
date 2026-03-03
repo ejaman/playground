@@ -3,7 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 
 const pretendard = localFont({
-  src: "../../../public/fonts/PretendardVariable.woff2",
+  src: "../assets/fonts/PretendardVariable.woff2",
   display: "swap",
   variable: "--pretendard",
 });

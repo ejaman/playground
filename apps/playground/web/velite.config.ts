@@ -37,7 +37,7 @@ const posts = defineCollection({
     .transform((data) => ({
       ...data,
       id: data.slug,
-      url: `/posts/${data.slug}`,
+      url: `/blog/posts/${data.slug}`,
       seriesTitle: data.series ? getSeriesTitle(data.series) : undefined,
     })),
 });

@@ -6,14 +6,14 @@
 
 
 ### 1. Ground Rules
-- 모든 글은 `apps/blog/posts` 하위에 위치한다.
+- 모든 글은 `apps/playground/posts` 하위에 위치한다.
 - 파일명 규칙: `YYYY-MM-DD-slug.md` (예: `2026-02-24-turborepo-setup.md`)
 - 이미지는 포스트와 동일한 경로에 폴더를 만들어 관리한다.
 
 ### 2. 시리즈 관리
 시리즈 중복 생성을 막기 위해 모든 시리즈를 `serise.json`에서 중앙 관리하도록 한다.
 새로운 시리즈를 만들 때는 반드시 이 파일에 먼저 등록해야 한다.
-- 관리 파일: apps/blog/posts/series.json
+- 관리 파일: apps/playground/posts/series.json
 
 파일 구조 예시
 ```

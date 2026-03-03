@@ -1,9 +1,10 @@
 {
   "extends": "../../../packages/typescript-config/nextjs.json",
   "compilerOptions": {
-    "moduleResolution": "Bundler", // 이 부분을 추가하여 상속받은 값을 덮어씁니다.
+    "moduleResolution": "Bundler",
     "paths": {
-      "#site/content": ["./.velite"]
+      "#site/content": ["./.velite"],
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

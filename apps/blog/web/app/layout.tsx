@@ -1,6 +1,6 @@
 import "../src/shared/lib/fonts";
 import { fonts } from "../src/shared/lib/fonts";
-import "../src/shared/styles/globals.css";
+import "../src/app/styles/globals.css";
 import { Header } from "../src/shared/ui/Header";
 
 export default function RootLayout({

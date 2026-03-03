@@ -52,17 +52,20 @@ export function Header() {
           Playground 🤾
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-3">
-          <div className="w-40 sm:w-56">
-            <label htmlFor="site-search" className="sr-only">
-              검색
-            </label>
-            <input
-              id="site-search"
-              type="search"
-              placeholder="게시물 검색..."
-              className="w-full rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground shadow-sm outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2"
-            />
+        <nav className="flex flex-1 items-center justify-end gap-4 sm:gap-6">
+          <div className="flex gap-3 text-sm font-medium">
+            <Link
+              href="/blog"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/hub"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Hub
+            </Link>
           </div>
 
           <button
@@ -72,7 +75,7 @@ export function Header() {
           >
             {mode === "dark" ? "다크모드: 켜짐" : "다크모드: 자동"}
           </button>
-        </div>
+        </nav>
       </div>
     </header>
   );

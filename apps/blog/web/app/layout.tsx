@@ -1,7 +1,7 @@
-import "../src/shared/lib/fonts";
-import { fonts } from "../src/shared/lib/fonts";
-import "../src/shared/styles/globals.css";
-import { Header } from "../src/shared/ui/Header";
+import "@/shared/lib/fonts";
+import { fonts } from "@/shared/lib/fonts";
+import "@/app/styles/globals.css";
+import { Header } from "@/shared/ui/Header";
 
 export default function RootLayout({
   children,

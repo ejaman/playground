@@ -42,13 +42,7 @@ export function Profile({
   className,
 }: ProfileProps) {
   return (
-    <div
-      className={cn(
-        "rounded-2xl border-b border-border/60 bg-card/50 p-6",
-        "flex gap-6",
-        className,
-      )}
-    >
+    <div className={cn("rounded-2xl  bg-card/50 p-6", "flex gap-6", className)}>
       {/* 프로필 이미지 */}
       <div className="shrink-0">
         <img

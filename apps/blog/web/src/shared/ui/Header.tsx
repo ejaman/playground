@@ -10,9 +10,9 @@ function applyTheme(mode: ThemeMode) {
   const root = document.documentElement;
 
   if (mode === "dark") {
-    root.dataset.theme = "dark";
+    root.classList.add("dark");
   } else {
-    delete root.dataset.theme;
+    root.classList.remove("dark");
   }
 }
 

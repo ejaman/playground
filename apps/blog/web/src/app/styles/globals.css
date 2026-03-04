@@ -1,91 +1,106 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @source "../../**/*.{ts,tsx}";
 @source "../../../app/**/*.{ts,tsx}";
 
 @plugin "@tailwindcss/typography";
 
-@theme {
-  /* 1. 브랜드 컬러 정의 (v4 방식) */
-  --color-brand-primary: #3b82f6;
-  --color-brand-secondary: #6366f1;
+/* ─── 다크모드: .dark 클래스 방식 ───────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* 2. 시멘틱 컬러 (shadcn/ui 스타일 변수 연결) */
+/* ─── Tailwind 테마 변수 연결 ────────────────────────────────── */
+@theme inline {
+  /* 색상 */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border);
-  --color-ring: var(--foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
 
-  /* 3. 타이포그래피 */
+  /* 브랜드·포인트 (라이트/다크 공통) */
+  --color-brand-primary: #3b82f6;
+  --color-brand-secondary: #6366f1;
+  --color-point: var(--point);
+  --color-point-foreground: var(--point-foreground);
+  --color-point-background: var(--point-background);
+
+  /* 타이포그래피 */
   --font-sans: var(--pretendard), var(--font-geist-sans), sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* 반경 */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* data-theme="dark"일 때 dark: variant 적용 (수동 다크모드 + prose 등) */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
-/* 4. CSS 변수 기반 시스템 (다크모드 대응) */
+/* ─── 라이트 모드 CSS 변수 ────────────────────────────────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --border: oklch(0.929 0.013 255.508);
   --radius: 0.625rem;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --primary: #0f172a;
+  --primary-foreground: #f8fafc;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f8fafc;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #94a3b8;
+
+  /* 포인트 색상 */
+  /* 라이트 모드 전용 (다크는 아래 .dark에서 기존 값 유지) */
+  --point: #258ceb;
+  --point-foreground: #0b1f3a;
+  --point-background: #e8f0ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --accent: #1e293b;
-    --border: #1e293b;
-  }
-}
-
-/* 수동 다크모드 토글용 data-theme 속성 (시스템 설정과 별도) */
-:root[data-theme="dark"] {
+/* ─── 다크 모드 CSS 변수 ─────────────────────────────────────── */
+.dark {
   --background: #020617;
   --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --primary: #f8fafc;
+  --primary-foreground: #0f172a;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
   --accent: #1e293b;
+  --accent-foreground: #f8fafc;
+  --destructive: #f87171;
   --border: #1e293b;
+  --input: #1e293b;
+  --ring: #475569;
+
+  /* 포인트 색상 */
+  --point: #96d0ff;
+  --point-foreground: #1e3a4a;
+  --point-background: #1a2d38;
 }
 
-/* 기본 스타일 초기화 */
+/* ─── 기본 스타일 ────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -99,18 +114,14 @@
     letter-spacing: -0.02em;
     max-width: 100vw;
     overflow-x: hidden;
-    @apply bg-background text-foreground;
   }
 
-  /* 마크다운 가독성 (Typography) 커스텀 */
+  /* 마크다운 Typography: max-w-none만 여기서. --tw-prose-* 는 .prose-slate 가 덮어써서
+     레이어 밖 "prose 변수 (실제 적용)" 블록에서 .prose-slate / .prose-invert 로 설정함 */
   .prose {
     @apply max-w-none;
-    --tw-prose-body: var(--foreground);
-    --tw-prose-headings: var(--foreground);
-    --tw-prose-links: var(--color-brand-primary);
   }
 
-  /* 목차 클릭 시 스크롤 시 제목이 상단에 걸리지 않도록 여백 */
   .prose h1[id],
   .prose h2[id],
   .prose h3[id],
@@ -120,12 +131,16 @@
     scroll-margin-top: 6rem;
   }
 
-  /* 제목 앵커 링크 (rehype-autolink-headings) */
   .prose .anchor {
     @apply no-underline text-muted-foreground;
   }
   .prose .anchor:hover {
     @apply text-foreground;
+  }
+
+  /* 인라인 코드 (한 줄 백틱 `코드`) */
+  .prose :not(pre) > code {
+    @apply rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-sm;
   }
 
   /* rehype-pretty-code 코드 블록 */
@@ -140,77 +155,61 @@
   }
 }
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+/* ─── 레이어 밖: typography 플러그인보다 나중에 적용 ─────────────────────── */
+
+/* prose 변수 (실제 적용) - PostBody 가 prose-slate / dark:prose-invert 사용해서 여기서 덮어씀 */
+.prose.prose-slate {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--point);
+}
+.dark .prose.prose-invert {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--point);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
+.prose.prose a:hover {
+  opacity: 0.85;
+}
+/* blockquote: 인용 부호·기울임·굵기 제거 (typography 덮어쓰기) */
+.prose blockquote::before,
+.prose blockquote::after {
+  content: none;
+}
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:first-of-type::after {
+  content: none;
+}
+.prose.prose p {
+  margin: 0.5em 0;
+}
+
+/* prose ul/ol 마진 (원하는 값으로 수정) */
+.prose.prose ul,
+.prose.prose ol {
+  margin: 0.5em 0;
+}
+
+.prose.prose figure {
+  margin: 1em 0;
+}
+
+/* 특이도 높여 typography 덮어쓰기 (배경·여백·테두리) */
+.prose.prose blockquote {
+  font-style: normal;
+  font-weight: normal;
+  background-color: var(--background);
+  border: 1px solid var(--color-border);
+  border-inline-start-width: 1px;
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 1rem;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-inline-start: 1rem;
 }

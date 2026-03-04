@@ -100,7 +100,11 @@ if (hasKorean) {
       .toLowerCase()
       .replace(/[^a-z0-9-]/g, "");
   } catch (e) {
-    console.warn("⚠️ AI 호출 실패. 기본 슬러그를 생성합니다.");
+    console.error("\n❌ AI 호출 실패 상세:");
+    console.error("  message:", e?.message ?? String(e));
+    if (e?.stack) console.error("  stack:", e.stack);
+    if (e?.cause) console.error("  cause:", e.cause);
+    console.warn("⚠️ 기본 슬러그로 생성합니다.");
     slug = `post-${Date.now()}`;
   }
 } else {

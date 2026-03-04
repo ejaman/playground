@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/shared/ui/Button";
+import { Button } from "@/shared/ui/button";
 
 type ThemeMode = "auto" | "dark";
 

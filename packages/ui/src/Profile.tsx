@@ -10,6 +10,7 @@ export interface SocialLink {
 }
 
 export interface ProfileProps {
+  name: string;
   image: string;
   description: string;
   socials?: SocialLink[];
@@ -33,6 +34,7 @@ const SOCIAL_LABELS: Record<SocialType, string> = {
 };
 
 export function Profile({
+  name,
   image,
   description,
   socials = [],
@@ -43,7 +45,7 @@ export function Profile({
     <div
       className={cn(
         "rounded-2xl border-b border-border/60 bg-card/50 p-6",
-        "flex gap-4",
+        "flex gap-6",
         className,
       )}
     >
@@ -51,7 +53,7 @@ export function Profile({
       <div className="shrink-0">
         <img
           src={image}
-          alt="이지민 프로필 이미지"
+          alt={`${name} 프로필 이미지`}
           width={96}
           height={96}
           className="size-24 border border-border/60 object-cover ring-2 ring-border/50 shadow-md rounded-full"
@@ -59,12 +61,12 @@ export function Profile({
         />
       </div>
 
-      <div className="flex flex-col gap-4 min-w-0">
+      <div className="flex flex-col min-w-0">
         <div>
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            이지민
+          <h2 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+            {name}
           </h2>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-1.5 whitespace-pre-line text-m leading-relaxed text-muted-foreground">
             {description}
           </p>
         </div>
@@ -90,7 +92,7 @@ export function Profile({
                   className={cn(
                     "inline-flex items-center gap-2 rounded-lg py-2 text-sm font-medium",
                     "text-muted-foreground transition-colors",
-                    "hover:bg-muted/80 hover:text-foreground",
+                    "hover:text-point",
                   )}
                 >
                   <Icon size={14} />

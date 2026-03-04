@@ -49,12 +49,12 @@ export function Header() {
       <div className="mx-auto flex items-center justify-between gap-3 px-7 py-4">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-tight text-foreground sm:text-base"
+          className="text-lg font-semibold tracking-tight text-foreground sm:text-xl"
         >
           Playground 🤾
         </Link>
 
-        <nav className="flex flex-1 items-center justify-end gap-4 sm:gap-6">
+        <nav className="flex flex-1 items-center justify-end gap-2 sm:gap-6">
           <div className="flex gap-1">
             <Button asChild variant="ghost" size="sm">
               <Link href="/blog">Blog</Link>
@@ -76,7 +76,9 @@ export function Header() {
             ) : (
               <Sun className="size-4" aria-hidden />
             )}
-            {mode === "dark" ? "다크: 켜짐" : "다크: 자동"}
+            <span className="hidden sm:inline">
+              {mode === "dark" ? "다크: 켜짐" : "다크: 자동"}
+            </span>
           </Button>
         </nav>
       </div>

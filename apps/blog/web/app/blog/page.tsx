@@ -11,8 +11,9 @@ export default function BlogPage() {
   return (
     <div className="max-w-3xl mx-auto py-8">
       <Profile
+        name="Frontend Playground"
         image="/images/jellyfish.webp"
-        description="안녕하세요. 이지민입니다."
+        description={`실무에서 새로운 기능 실험까지!\n새로운 도약을 위한 자유로운 실험실입니다.`}
         socials={[
           { type: "github", url: "https://github.com/jellyfish" },
           { type: "link", url: "https://jellyfish.example.com" },

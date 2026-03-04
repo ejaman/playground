@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import { ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import type { HeadingItem } from "@/shared/lib/parseHeadingsFromHtml";
+import { Button } from "@/shared/ui/Button";
 
 const variantClasses = {
   /** 좁은 화면: 상단 배치, 배경 + 접기/펼치기 */
@@ -94,19 +95,20 @@ export function TableOfContents({
   if (variant === "sticky-top") {
     return (
       <nav aria-label="목차" className={variantClasses[variant]}>
-        <button
+        <Button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex w-full items-center justify-between px-4 py-3 text-left font-semibold text-foreground hover:bg-muted/50 rounded-t-lg transition-colors"
+          variant="ghost"
+          className="h-auto w-full justify-between rounded-t-lg px-4 py-3 text-left font-semibold text-foreground hover:bg-muted/50"
           aria-expanded={isOpen}
         >
           <span>목차</span>
-          {/* <ChevronDown
+          <ChevronDown
             className="size-5 shrink-0 text-muted-foreground transition-transform"
             style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
             aria-hidden
-          /> */}
-        </button>
+          />
+        </Button>
         {isOpen && (
           <div className="max-h-40 overflow-y-auto border-t border-border px-4 py-3">
             {listContent}

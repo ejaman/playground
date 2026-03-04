@@ -1,6 +1,7 @@
 import { compareDesc, parseISO } from "date-fns";
 import PostCard from "@/entities/post/ui/PostCard";
 import { publishedPosts } from "@/entities/post/lib/posts";
+import { Profile } from "@repo/ui";
 
 export default function BlogPage() {
   const allPosts = publishedPosts.sort((a, b) =>
@@ -8,8 +9,15 @@ export default function BlogPage() {
   );
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8">🐾 개발 실험실</h1>
+    <div className="max-w-3xl mx-auto py-8">
+      <Profile
+        image="/images/jellyfish.webp"
+        description="안녕하세요. 이지민입니다."
+        socials={[
+          { type: "github", url: "https://github.com/jellyfish" },
+          { type: "link", url: "https://jellyfish.example.com" },
+        ]}
+      />
 
       <div className="space-y-6">
         {allPosts.map((post) => (

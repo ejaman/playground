@@ -1,5 +1,43 @@
-import React from "react";
+import { compareDesc, parseISO } from "date-fns";
+import { publishedPosts } from "@/entities/post/lib/posts";
+import { getSeriesListFromJson } from "@/entities/series/lib/series";
+import { SerieCard } from "@/entities/series/SeriesCard";
 
-export default function page() {
-  return <div>page</div>;
+export default function SeriesPage() {
+  const seriesFromJson = getSeriesListFromJson();
+
+  const seriesWithPosts = seriesFromJson
+    .map((item) => ({
+      key: item.key,
+      title: item.title,
+      description: item.description,
+      posts: publishedPosts.filter((p) => p.series === item.key),
+    }))
+    .filter((s) => s.posts.length > 0);
+
+  const seriesList = [...seriesWithPosts].sort((a, b) => {
+    const aLatest = a.posts.reduce(
+      (max, p) => (p.date > max ? p.date : max),
+      "",
+    );
+    const bLatest = b.posts.reduce(
+      (max, p) => (p.date > max ? p.date : max),
+      "",
+    );
+    return compareDesc(parseISO(aLatest), parseISO(bLatest));
+  });
+
+  return (
+    <div className="space-y-5">
+      {seriesList.map((series) => (
+        <SerieCard
+          key={series.key}
+          seriesKey={series.key}
+          title={series.title}
+          description={series.description}
+          posts={series.posts}
+        />
+      ))}
+    </div>
+  );
 }

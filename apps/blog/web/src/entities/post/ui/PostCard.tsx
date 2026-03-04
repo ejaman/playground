@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { format, parseISO } from "date-fns";
 import { type Post } from "#site/content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/Card";
 import { Badge } from "@/shared/ui/Badge";
+import { formatDateYMD } from "@/shared/lib/utils";
 
 export default function PostCard(post: Post) {
   return (
@@ -12,9 +12,7 @@ export default function PostCard(post: Post) {
           <CardTitle className="text-xl">{post.title}</CardTitle>
 
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <time dateTime={post.date}>
-              {format(parseISO(post.date), "yyyy년 MM월 dd일")}
-            </time>
+            <time dateTime={post.date}>{formatDateYMD(post.date)}</time>
             {post.seriesTitle && (
               <span className="font-medium text-point">
                 · {post.seriesTitle}

@@ -1,4 +1,5 @@
 import { Tag } from "@/shared/ui/Tag";
+import { formatDateYMD } from "@/shared/lib/utils";
 
 interface PostHeaderProps {
   title: string;
@@ -21,7 +22,7 @@ export const PostHeader = ({ title, date, tags }: PostHeaderProps) => (
     )}
 
     <div className="flex items-center text-sm text-muted-foreground">
-      <time dateTime={date}>{date}</time>
+      <time dateTime={date}>{formatDateYMD(date)}</time>
     </div>
   </header>
 );

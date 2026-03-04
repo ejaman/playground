@@ -1,12 +1,24 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import { Profile } from "@repo/ui";
-import { TabLine } from "../../src/entities/post/ui/TabLine";
+import { TabLine } from "../../../src/entities/post/ui/TabLine";
 
 export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isPostDetail = pathname.startsWith("/blog/posts/");
+
+  // 게시글 상세 페이지([slug])에서는 프로필/탭 없이 내용만 표시
+  if (isPostDetail) {
+    return <div className="max-w-3xl mx-auto py-8">{children}</div>;
+  }
+
+  // /blog, /blog/series 등 리스트 페이지에서는 프로필 + 탭 + 콘텐츠
   return (
     <div className="max-w-3xl mx-auto py-8 space-y-6">
       <Profile

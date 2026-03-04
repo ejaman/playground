@@ -13,7 +13,6 @@ export default function PostContent({
   title,
   date,
   tags,
-  series,
   html,
   headings,
 }: PostContentProps) {

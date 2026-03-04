@@ -3,6 +3,7 @@
 
 @source "../../**/*.{ts,tsx}";
 @source "../../../app/**/*.{ts,tsx}";
+@source "../../../../../../packages/ui/src/**/*.tsx";
 
 @plugin "@tailwindcss/typography";
 

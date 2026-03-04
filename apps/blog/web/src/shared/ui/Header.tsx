@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@/shared/ui/button";
 
 type ThemeMode = "auto" | "dark";
 
@@ -47,34 +49,37 @@ export function Header() {
       <div className="mx-auto flex items-center justify-between gap-3 px-7 py-4">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-tight text-foreground sm:text-base"
+          className="text-lg font-semibold tracking-tight text-foreground sm:text-xl"
         >
           Playground 🤾
         </Link>
 
-        <nav className="flex flex-1 items-center justify-end gap-4 sm:gap-6">
-          <div className="flex gap-3 text-sm font-medium">
-            <Link
-              href="/blog"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/hub"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Hub
-            </Link>
+        <nav className="flex flex-1 items-center justify-end gap-2 sm:gap-6">
+          <div className="flex gap-1">
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/blog">Blog</Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/hub">Hub</Link>
+            </Button>
           </div>
 
-          <button
+          <Button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex items-center rounded-full border border-border px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted/80 transition-colors"
+            variant="outline"
+            size="sm"
+            className="gap-2"
           >
-            {mode === "dark" ? "다크모드: 켜짐" : "다크모드: 자동"}
-          </button>
+            {mode === "dark" ? (
+              <Moon className="size-4" aria-hidden />
+            ) : (
+              <Sun className="size-4" aria-hidden />
+            )}
+            <span className="hidden sm:inline">
+              {mode === "dark" ? "다크: 켜짐" : "다크: 자동"}
+            </span>
+          </Button>
         </nav>
       </div>
     </header>

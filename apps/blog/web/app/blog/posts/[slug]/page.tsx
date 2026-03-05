@@ -50,14 +50,42 @@ export default async function PostPage({
 
   const headings = parseHeadingsFromHtml(post.body);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description ?? post.title,
+    datePublished: post.date,
+    dateModified: post.date,
+    url: `${BASE_URL}${post.url}`,
+    author: {
+      "@type": "Person",
+      name: "이지민",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "이지민",
+      url: BASE_URL,
+    },
+    keywords: post.tags?.join(", "),
+    ...(post.thumbnail && { image: `${BASE_URL}${post.thumbnail}` }),
+  };
+
   return (
-    <PostContent
-      title={post.title}
-      date={post.date}
-      tags={post.tags}
-      series={post.series}
-      html={post.body}
-      headings={headings}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PostContent
+        title={post.title}
+        date={post.date}
+        tags={post.tags}
+        series={post.series}
+        html={post.body}
+        headings={headings}
+      />
+    </>
   );
 }

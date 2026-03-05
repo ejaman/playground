@@ -26,8 +26,8 @@ export default function BlogLayout({
         image="/images/jellyfish.webp"
         description={`실무에서 새로운 기능 실험까지!\n새로운 도약을 위한 자유로운 실험실입니다.`}
         socials={[
-          { type: "github", url: "https://github.com/jellyfish" },
-          { type: "link", url: "https://jellyfish.example.com" },
+          { type: "github", url: "https://github.com/ejaman" },
+          { type: "link", url: "https://velog.io/@ejaman/posts" },
         ]}
       />
 

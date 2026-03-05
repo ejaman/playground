@@ -2,6 +2,32 @@ import "@/shared/lib/fonts";
 import { fonts } from "@/shared/lib/fonts";
 import "@/app/styles/globals.css";
 import { Header } from "@/shared/ui/Header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://playground-two-lemon.vercel.app"),
+  title: {
+    default: "Playground",
+    template: "%s | Playground",
+  },
+  description:
+    "실무에서 새로운 기능 실험까지! 새로운 도약을 위한 자유로운 실험실입니다.",
+  openGraph: {
+    title: "Playground",
+    description:
+      "실무에서 새로운 기능 실험까지! 새로운 도약을 위한 자유로운 실험실입니다.",
+    url: "https://playground-two-lemon.vercel.app",
+    siteName: "Playground",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Playground",
+    description:
+      "실무에서 새로운 기능 실험까지! 새로운 도약을 위한 자유로운 실험실입니다.",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -14,7 +40,6 @@ export default function RootLayout({
         className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
       >
         <Header />
-
         <main>{children}</main>
       </body>
     </html>

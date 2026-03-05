@@ -6,8 +6,6 @@ series: "playground"
 published: true
 ---
 
-# 컴포넌트 네이밍 컨벤션(MacOS 대소문자 이슈)
-
 # 코드 컨벤션
 
 ## 파일 네이밍 규칙

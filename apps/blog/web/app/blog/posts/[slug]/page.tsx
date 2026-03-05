@@ -2,6 +2,37 @@ import { notFound } from "next/navigation";
 import PostContent from "@/entities/post/ui/PostContent";
 import { parseHeadingsFromHtml } from "@/shared/lib/parseHeadingsFromHtml";
 import { publishedPosts } from "@/entities/post/lib/posts";
+import { Metadata } from "next";
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+// 동적 metadata 생성
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = publishedPosts.find((p) => p.id === slug);
+
+  if (!post) return {};
+
+  return {
+    title: post.title,
+    description: "description",
+    openGraph: {
+      title: post.title,
+      description: "description",
+      url: `https://playground-two-lemon.vercel.app${post.url}`,
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: "description",
+    },
+  };
+}
 
 export const generateStaticParams = async () =>
   publishedPosts.map((post) => ({ slug: post.id }));

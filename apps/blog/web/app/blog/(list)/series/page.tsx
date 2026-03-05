@@ -2,6 +2,12 @@ import { compareDesc, parseISO } from "date-fns";
 import { publishedPosts } from "@/entities/post/lib/posts";
 import { getSeriesListFromJson } from "@/entities/series/lib/series";
 import { SerieCard } from "@/entities/series/SeriesCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Series",
+  description: "시리즈 목록입니다.",
+};
 
 export default function SeriesPage() {
   const seriesFromJson = getSeriesListFromJson();

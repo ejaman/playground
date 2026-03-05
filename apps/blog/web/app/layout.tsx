@@ -1,8 +1,9 @@
 import "@/shared/lib/fonts";
-import { fonts } from "@/shared/lib/fonts";
 import "@/app/styles/globals.css";
-import { Header } from "@/shared/ui/Header";
 import { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { fonts } from "@/shared/lib/fonts";
+import { Header } from "@/shared/ui/Header";
 import { BASE_URL } from "@/shared/lib/constants";
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />{" "}
     </html>
   );
 }

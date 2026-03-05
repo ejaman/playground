@@ -3,9 +3,10 @@ import { fonts } from "@/shared/lib/fonts";
 import "@/app/styles/globals.css";
 import { Header } from "@/shared/ui/Header";
 import { Metadata } from "next";
+import { BASE_URL } from "@/shared/lib/constants";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://playground-two-lemon.vercel.app"),
+  metadataBase: new URL(BASE_URL),
   title: {
     default: "Frontend Playground",
     template: "%s | Playground",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: "Playground",
     description:
       "실무에서 새로운 기능 실험까지! 새로운 도약을 위한 자유로운 실험실입니다.",
-    url: "https://playground-two-lemon.vercel.app",
+    url: BASE_URL,
     siteName: "Playground",
     locale: "ko_KR",
     type: "website",

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { publishedPosts } from "@/entities/post/lib/posts";
+import { BASE_URL } from "@/shared/lib/constants";
 
 export const runtime = "edge";
 export const alt = "Post";
@@ -26,7 +27,7 @@ export default async function OgImage({ params }: Props) {
         }}
       >
         <img
-          src={`https://playground-two-lemon.vercel.app${post.thumbnail}`}
+          src={`${BASE_URL}${post.thumbnail}`}
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
         {/* 하단 그라데이션 오버레이 */}

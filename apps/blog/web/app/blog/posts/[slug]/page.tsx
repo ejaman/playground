@@ -3,6 +3,7 @@ import PostContent from "@/entities/post/ui/PostContent";
 import { parseHeadingsFromHtml } from "@/shared/lib/parseHeadingsFromHtml";
 import { publishedPosts } from "@/entities/post/lib/posts";
 import { Metadata } from "next";
+import { BASE_URL } from "@/shared/lib/constants";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.title,
       description: "description",
-      url: `https://playground-two-lemon.vercel.app${post.url}`,
+      url: `${BASE_URL}${post.url}`,
       type: "article",
       publishedTime: post.date,
       tags: post.tags,

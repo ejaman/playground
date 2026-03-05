@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://playground-two-lemon.vercel.app"),
   title: {
-    default: "Playground",
+    default: "Frontend Playground",
     template: "%s | Playground",
   },
   description:

@@ -30,6 +30,8 @@ const posts = defineCollection({
       date: s.isodate(),
       tags: s.array(s.string()).optional().default([]),
       series: s.string().optional(),
+      description: s.string().optional(),
+      thumbnail: s.string().optional(),
       published: s.boolean().optional().default(false),
       slug: s.path(),
       body: s.markdown(),

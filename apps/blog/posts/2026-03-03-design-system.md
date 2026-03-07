@@ -3,6 +3,7 @@ title: "디자인 시스템 만들기"
 date: "2026-03-03"
 tags: ["design-system", "shadcn", "tailwind"]
 series: "playground"
+description: "통일된 스타일링을 위한 첫 단계"
 published: true
 ---
 

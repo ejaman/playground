@@ -64,6 +64,11 @@ export function SerieCard({ title, description, posts }: SerieCardProps) {
                 ))}
               </div>
             )}
+            {post.description && (
+              <p className="mt-1 text-sm text-muted-foreground">
+                {post.description}
+              </p>
+            )}
           </article>
         ))}
       </div>

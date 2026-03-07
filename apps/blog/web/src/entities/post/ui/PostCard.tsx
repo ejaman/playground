@@ -34,6 +34,11 @@ export default function PostCard(post: Post) {
             </ul>
           </CardContent>
         )}
+        {post.description && (
+          <CardContent className="pt-0">
+            <p className="text-sm text-muted-foreground">{post.description}</p>
+          </CardContent>
+        )}
       </Link>
     </Card>
   );

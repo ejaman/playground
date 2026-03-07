@@ -84,7 +84,9 @@ const tags = tagsInput
 
 // ─── 슬러그 생성 ──────────────────────────────────────────────
 
-const date = new Date().toISOString().split("T")[0];
+const now = new Date();
+const datePart = now.toISOString().split("T")[0]; // 파일명용 YYYY-MM-DD
+const dateISO = now.toISOString(); // frontmatter용 (정렬 시 시간까지 반영)
 let slug = "";
 
 const hasKorean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(title);
@@ -118,7 +120,7 @@ if (hasKorean) {
 
 // ─── 파일 생성 ────────────────────────────────────────────────
 
-const fileName = `${date}-${slug}.md`;
+const fileName = `${datePart}-${slug}.md`;
 const fullPath = path.join(POSTS_PATH, fileName);
 
 if (fs.existsSync(fullPath)) {
@@ -132,7 +134,7 @@ const tagsYaml =
 
 const frontmatter = `---
 title: "${title}"
-date: "${date}"
+date: "${dateISO}"
 tags: ${tagsYaml}${selectedKey ? `\nseries: "${selectedKey}"` : ""}
 published: false
 ---

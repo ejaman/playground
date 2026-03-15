@@ -1,17 +1,22 @@
-"use client";
-
 import {
   CartLink,
   CategoryFilter,
   ProductList,
   ProductListFallback,
 } from "@/entities/experiment";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 // import { CartLink } from "@/entities/experiment";
 // import { CartLink } from "../../src/entities/experiment/ui/CartLink";
 
-export default function ExperimentPage() {
-  const [category, setCategory] = useState("all");
+interface ExperimentPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function ExperimentPage({
+  searchParams,
+}: ExperimentPageProps) {
+  const params = await searchParams;
+  const category = (params.category as string | undefined) ?? "all";
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -20,7 +25,7 @@ export default function ExperimentPage() {
         <CartLink />
       </div>
 
-      <CategoryFilter category={category} onCategoryChange={setCategory} />
+      <CategoryFilter category={category} />
 
       <Suspense fallback={<ProductListFallback />}>
         <ProductList category={category} />

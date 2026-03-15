@@ -90,7 +90,7 @@ export default function CartPage() {
           결제하기
         </button>
         <Link
-          href="/"
+          href="/experiment"
           className="block text-center text-sm text-gray-400 hover:text-gray-600"
         >
           쇼핑 계속하기

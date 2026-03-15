@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { BASE_URL } from "@/shared/lib/constants";
 import { fonts } from "@/shared/lib/fonts";
 import { Header } from "@/shared/ui/Header";
+import { Providers } from "@/shared/ui";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -37,12 +38,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${fonts.pretendard.variable}`}>
-      <body
-        className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
-      >
-        <Header />
-        <main>{children}</main>
-      </body>
+      <Providers>
+        <body
+          className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
+        >
+          <Header />
+          <main>{children}</main>
+        </body>
+      </Providers>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );

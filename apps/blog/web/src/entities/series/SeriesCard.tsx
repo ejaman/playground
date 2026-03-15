@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { compareDesc, parseISO } from "date-fns";
 import { type Post } from "#site/content";
-import { formatDateYMD } from "@/shared/lib/utils";
-import { Tag } from "@/shared/ui/Tag";
+import { formatDateYMD, Tag } from "@/shared";
 
 interface SerieCardProps {
   seriesKey: string;

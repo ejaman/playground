@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { type Post } from "#site/content";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/Card";
-import { Badge } from "@/shared/ui/Badge";
-import { formatDateYMD } from "@/shared/lib/utils";
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  formatDateYMD,
+} from "@/shared";
 
 export default function PostCard(post: Post) {
   return (

@@ -1,4 +1,4 @@
-import { Badge } from "@/shared/ui/Badge";
+import { Badge } from "./Badge";
 
 interface TagProps {
   label: string;

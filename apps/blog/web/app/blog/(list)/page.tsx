@@ -1,6 +1,5 @@
 import { compareDesc, parseISO } from "date-fns";
-import PostCard from "@/entities/post/ui/PostCard";
-import { publishedPosts } from "@/entities/post/lib/posts";
+import { PostCard, publishedPosts } from "@/entities/post";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import type { HeadingItem } from "@/shared/lib/parseHeadingsFromHtml";
-import { Button } from "@/shared/ui/button";
+import type { HeadingItem } from "@/shared";
+import { Button } from "@/shared";
 
 const variantClasses = {
   /** 좁은 화면: 상단 배치, 배경 + 접기/펼치기 */

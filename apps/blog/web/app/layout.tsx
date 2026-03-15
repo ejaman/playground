@@ -1,10 +1,7 @@
-import "@/shared/lib/fonts";
 import "@/app/styles/globals.css";
 import { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { fonts } from "@/shared/lib/fonts";
-import { Header } from "@/shared/ui/Header";
-import { BASE_URL } from "@/shared/lib/constants";
+import { BASE_URL, fonts, Header } from "@/shared";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

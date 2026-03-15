@@ -1,7 +1,9 @@
 import { compareDesc, parseISO } from "date-fns";
-import { publishedPosts } from "@/entities/post/lib/posts";
-import { getSeriesListFromJson } from "@/entities/series/lib/series";
-import { SerieCard } from "@/entities/series/SeriesCard";
+import { publishedPosts } from "@/entities/post";
+import {
+  getSeriesListFromJson,
+  SerieCard,
+} from "@/entities/series";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

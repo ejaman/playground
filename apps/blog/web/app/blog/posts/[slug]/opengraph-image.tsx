@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { publishedPosts } from "@/entities/post/lib/posts";
-import { BASE_URL } from "@/shared/lib/constants";
+import { publishedPosts } from "@/entities/post";
+import { BASE_URL } from "@/shared";
 
 export const runtime = "edge";
 export const alt = "Post";

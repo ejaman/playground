@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
-import PostContent from "@/entities/post/ui/PostContent";
-import { parseHeadingsFromHtml } from "@/shared/lib/parseHeadingsFromHtml";
-import { publishedPosts } from "@/entities/post/lib/posts";
+import { PostContent, publishedPosts } from "@/entities/post";
+import { BASE_URL, parseHeadingsFromHtml } from "@/shared";
 import { Metadata } from "next";
-import { BASE_URL } from "@/shared/lib/constants";
 
 interface Props {
   params: Promise<{ slug: string }>;

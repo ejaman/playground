@@ -38,14 +38,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${fonts.pretendard.variable}`}>
-      <Providers>
-        <body
-          className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
-        >
+      <body
+        className={`${fonts.pretendard.className} ${fonts.pretendard.variable} antialiased`}
+      >
+        <Providers>
           <Header />
           <main>{children}</main>
-        </body>
-      </Providers>
+        </Providers>
+      </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );

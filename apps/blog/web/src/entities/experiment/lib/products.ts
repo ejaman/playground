@@ -1,4 +1,4 @@
-import { supabase } from "@/shared";
+import { supabase } from "@/shared/lib";
 import type { Product } from "../model/types";
 
 export const fetchProducts = async (category?: string): Promise<Product[]> => {

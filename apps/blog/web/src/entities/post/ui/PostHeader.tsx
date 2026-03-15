@@ -1,4 +1,5 @@
-import { formatDateYMD, Tag } from "@/shared";
+import { formatDateYMD } from "@/shared/lib/utils";
+import { Tag } from "@/shared/ui/Tag";
 
 interface PostHeaderProps {
   title: string;

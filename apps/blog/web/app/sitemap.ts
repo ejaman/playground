@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { publishedPosts } from "@/entities/post";
-import { BASE_URL } from "@/shared";
+import { BASE_URL } from "@/shared/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 정적 페이지

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PostContent, publishedPosts } from "@/entities/post";
-import { BASE_URL, parseHeadingsFromHtml } from "@/shared";
+import { BASE_URL } from "@/shared/lib/constants";
+import { parseHeadingsFromHtml } from "@/shared/lib/parseHeadingsFromHtml";
 import { Metadata } from "next";
 
 interface Props {

@@ -33,6 +33,9 @@ out/
 build
 dist
 
+# Local apps that should stay untracked
+apps/playground/
+
 
 # Debug
 npm-debug.log*

@@ -1,5 +1,3 @@
-import { build } from "velite";
-
 const nextConfig = {
   turbopack: {},
   images: {
@@ -12,9 +10,5 @@ const nextConfig = {
     ],
   },
 };
-
-if (process.env.NODE_ENV !== "development") {
-  build({ logLevel: "warn" });
-}
 
 export default nextConfig;

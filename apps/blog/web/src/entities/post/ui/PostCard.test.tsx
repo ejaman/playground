@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import PostCard from "./PostCard";
 import { formatDateYMD } from "@/shared/lib/utils";
+import { Post } from "#site/content";
 
 describe("PostCard", () => {
   const basePost = {
@@ -11,7 +12,7 @@ describe("PostCard", () => {
     tags: ["tag1", "tag2"],
     seriesTitle: "시리즈 제목",
     description: "포스트 설명",
-  } as any;
+  } as Post;
 
   it("제목과 링크를 렌더링한다", () => {
     render(<PostCard {...basePost} />);
@@ -47,7 +48,7 @@ describe("PostCard", () => {
     const { rerender } = render(<PostCard {...basePost} />);
 
     expect(screen.getByRole("list", { name: "태그" })).toBeInTheDocument();
-    basePost.tags.forEach((tag: string) => {
+    basePost?.tags?.forEach((tag: string) => {
       expect(screen.getByText(`#${tag}`)).toBeInTheDocument();
     });
 
@@ -60,9 +61,11 @@ describe("PostCard", () => {
   it("description 이 있을 때만 렌더링한다", () => {
     const { rerender } = render(<PostCard {...basePost} />);
 
-    expect(screen.getByText(basePost.description)).toBeInTheDocument();
+    expect(screen.getByText(basePost?.description ?? "")).toBeInTheDocument();
 
     rerender(<PostCard {...{ ...basePost, description: undefined }} />);
-    expect(screen.queryByText(basePost.description)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(basePost?.description ?? ""),
+    ).not.toBeInTheDocument();
   });
 });

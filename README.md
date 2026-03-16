@@ -7,8 +7,8 @@
 
 
 **[남은 과제 (Roadmap)]**
-1. AI Self-Healing CI 
-~~빌드 에러 자동 분석: GitHub Actions에서 빌드 실패 시 에러 로그를 AI에 전달, 수정 제안을 PR 코멘트로 자동 게시~~
+1. AI Self-Healing CI   
+~~빌드 에러 자동 분석: GitHub Actions에서 빌드 실패 시 에러 로그를 AI에 전달, 수정 제안을 PR 코멘트로 자동 게시~~  
 워크플로우 설계 문서화: 단순 구현에 그치지 않고 프롬프트 설계 근거와 한계점을 블로그 포스팅으로 기록
 
 2. PPR + Lighthouse 성능 자동화

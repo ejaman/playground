@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - main # main 브랜치에 푸시될 때만 실행됩니다.
+      - main # main 브랜치에 푸시될 때만 실행
 
 jobs:
   Deploy-Production:
@@ -31,8 +31,8 @@ jobs:
         run: pnpm install
 
       - name: Type Check & Lint (Turborepo)
-        # 이 단계에서 에러가 나면 배포가 중단됩니다.
-        run: pnpm turbo run type-check lint
+        # 이 단계에서 에러가 나면 배포가 중단
+        run: pnpm turbo run check-types lint
 
       - name: Install Vercel CLI
         run: pnpm add -g vercel@latest

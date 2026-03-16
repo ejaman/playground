@@ -10,7 +10,7 @@ interface PostHeaderProps {
 export const PostHeader = ({ title, date, tags }: PostHeaderProps) => (
   <header className="mb-12 border-b border-border pb-8 font-sans">
     <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-      {ti13tle}
+      {title}
     </h1>
 
     {tags && tags.length > 0 && (

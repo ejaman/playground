@@ -102,7 +102,7 @@ export function TableOfContents({
           className="h-auto w-full justify-between rounded-t-lg px-4 py-3 text-left font-semibold text-foreground hover:bg-muted/50"
           aria-expanded={isOpen}
         >
-          <span>목차</span>
+          <span>목차 {title && `- ${title}`}</span>
           <ChevronDown
             className="size-5 shrink-0 text-muted-foreground transition-transform"
             style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}

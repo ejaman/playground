@@ -1,4 +1,5 @@
 import { Link, Mail } from "lucide-react";
+
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { cn } from "./lib/utils";
 
@@ -45,6 +46,7 @@ export function Profile({
     <div className={cn("rounded-2xl  bg-card/50 p-6", "flex gap-6", className)}>
       {/* 프로필 이미지 */}
       <div className="shrink-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={image}
           alt={`${name} 프로필 이미지`}

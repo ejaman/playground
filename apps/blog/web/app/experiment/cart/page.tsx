@@ -1,6 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/shared/store";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function CartPage() {
@@ -43,9 +44,11 @@ export default function CartPage() {
             key={item.id}
             className="flex items-center gap-4 border rounded-xl p-4"
           >
-            <img
+            <Image
               src={item.image}
               alt={item.name}
+              width={100}
+              height={100}
               className="w-16 h-16 object-cover rounded-lg"
             />
             <div className="flex-1">

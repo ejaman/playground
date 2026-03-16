@@ -102,19 +102,14 @@ async function run() {
   // 6. 자동 수정 커밋 (빈 배열이 아닐 때만)
   let fixes = [];
   try {
-    fixes = JSON.parse(fixesContent);
+    // 코드블록 제거 후 파싱
+    const cleanJson = fixesContent.replace(/```json\n?|\n?```/g, "").trim();
+    fixes = JSON.parse(cleanJson);
   } catch {
     console.log("FIXES 파싱 실패, 스킵");
-    console.log("FIXES 원본:", fixesContent); // 이 줄 추가
+    console.log("FIXES 원본:", fixesContent);
     return;
   }
-  //   let fixes = [];
-  //   try {
-  //     fixes = JSON.parse(fixesContent);
-  //   } catch {
-  //     console.log("FIXES 파싱 실패, 스킵");
-  //     return;
-  //   }
 
   if (!Array.isArray(fixes) || fixes.length === 0) {
     console.log("자동 수정 없음, 스킵");

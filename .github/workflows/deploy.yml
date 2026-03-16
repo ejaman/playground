@@ -7,7 +7,13 @@ env:
 on:
   push:
     branches:
-      - main # main 브랜치에 푸시될 때만 실행
+      - main
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
 
 jobs:
   Deploy-Production:
@@ -28,10 +34,12 @@ jobs:
           cache: "pnpm"
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Caching for Turborepo # Type Check 전에 캐시 세팅해야 효과 있음
+        uses: rharkor/caching-for-turbo@v2.1.0
 
       - name: Type Check & Lint (Turborepo)
-        # 이 단계에서 에러가 나면 배포가 중단
         run: pnpm turbo run check-types lint
 
       - name: Install Vercel CLI

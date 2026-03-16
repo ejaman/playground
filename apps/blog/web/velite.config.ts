@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { defineCollection, defineConfig, s } from "velite";
 import type { Options as RehypePrettyCodeOptions } from "rehype-pretty-code";

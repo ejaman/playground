@@ -44,7 +44,6 @@ export default async function PostPage({
 }) {
   const { slug } = await params;
   const post = publishedPosts.find((p) => p.id === slug);
-  const test: number = "test";
 
   if (!post) notFound();
 

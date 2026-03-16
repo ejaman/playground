@@ -27,7 +27,7 @@ async function run() {
   console.log(`diff 크기: ${diff.length}자 → 모델: ${model}`);
 
   const systemPrompt = `Next.js + TypeScript 코드 리뷰어다.
-아래 두 가지를 반환하라.
+아래 두 가지 섹션을 반드시 포함해 반환하라.
 
 [REVIEW]
 버그 가능성, 타입 오류, 성능 문제만 지적하라.
@@ -36,10 +36,17 @@ async function run() {
 문제없으면 "LGTM ✅" 한 줄만 작성하라.
 
 [FIXES]
-자동 수정 가능한 항목만 unified diff 형식으로 작성하라.
-수정사항 없으면 "NONE"을 작성하라.
+자동 수정 가능한 항목이 있으면 아래 JSON 배열 형식으로만 반환하라.
+수정사항 없으면 빈 배열 []을 반환하라.
+반드시 JSON만 반환하고 다른 텍스트는 포함하지 마라.
 
-반드시 [REVIEW]와 [FIXES] 두 섹션을 모두 포함하라.`;
+[
+  {
+    "file": "apps/blog/web/app/page.tsx",
+    "search": "수정 전 코드 (파일에서 정확히 일치하는 문자열)",
+    "replace": "수정 후 코드"
+  }
+]`;
 
   // 3. Claude API 호출
   const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -51,7 +58,7 @@ async function run() {
     },
     body: JSON.stringify({
       model,
-      max_tokens: 512,
+      max_tokens: 1024,
       system: systemPrompt,
       messages: [{ role: "user", content: `[diff]\n${diff}` }],
     }),
@@ -92,18 +99,44 @@ async function run() {
 
   console.log("리뷰 코멘트 작성 완료");
 
-  // 6. 자동 수정 커밋 (NONE이 아닐 때만)
-  if (fixesContent === "NONE" || !fixesContent) {
+  // 6. 자동 수정 커밋 (빈 배열이 아닐 때만)
+  let fixes = [];
+  try {
+    fixes = JSON.parse(fixesContent);
+  } catch {
+    console.log("FIXES 파싱 실패, 스킵");
+    return;
+  }
+
+  if (!Array.isArray(fixes) || fixes.length === 0) {
     console.log("자동 수정 없음, 스킵");
     return;
   }
 
-  try {
-    // diff 파일로 저장 후 apply
-    fs.writeFileSync("claude-fixes.patch", fixesContent);
-    execSync("git apply --check claude-fixes.patch", { stdio: "pipe" });
-    execSync("git apply claude-fixes.patch");
+  // search/replace 방식으로 파일 직접 수정
+  let fixedCount = 0;
+  for (const fix of fixes) {
+    try {
+      const content = fs.readFileSync(fix.file, "utf8");
+      if (!content.includes(fix.search)) {
+        console.warn(`검색 문자열 없음, 스킵: ${fix.file}`);
+        continue;
+      }
+      const updated = content.replace(fix.search, fix.replace);
+      fs.writeFileSync(fix.file, updated);
+      fixedCount++;
+      console.log(`수정 완료: ${fix.file}`);
+    } catch (err) {
+      console.warn(`파일 수정 실패, 스킵: ${fix.file} - ${err.message}`);
+    }
+  }
 
+  if (fixedCount === 0) {
+    console.log("적용된 수정 없음, 스킵");
+    return;
+  }
+
+  try {
     // claude 계정으로 커밋
     execSync('git config user.name "claude"');
     execSync('git config user.email "claude@anthropic.com"');
@@ -111,9 +144,8 @@ async function run() {
     execSync('git commit -m "fix: auto-fix by Claude code review"');
     execSync(`git push origin ${GITHUB_HEAD_REF}`);
 
-    console.log("자동 수정 커밋 완료");
+    console.log(`자동 수정 커밋 완료 (${fixedCount}개 파일)`);
 
-    // 수정 완료 코멘트 추가
     await fetch(
       `https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_PR_NUMBER}/comments`,
       {
@@ -123,13 +155,12 @@ async function run() {
           Accept: "application/vnd.github.v3+json",
         },
         body: JSON.stringify({
-          body: "🔧 자동 수정 가능한 항목을 커밋했어요.",
+          body: `🔧 ${fixedCount}개 항목을 자동 수정했어요.`,
         }),
       },
     );
   } catch (err) {
-    // patch 적용 실패는 무시 (리뷰 코멘트는 이미 달렸으므로)
-    console.warn("자동 수정 patch 적용 실패 (무시):", err.message);
+    console.warn("커밋 실패:", err.message);
   }
 }
 

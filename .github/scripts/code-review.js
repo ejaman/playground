@@ -105,8 +105,16 @@ async function run() {
     fixes = JSON.parse(fixesContent);
   } catch {
     console.log("FIXES 파싱 실패, 스킵");
+    console.log("FIXES 원본:", fixesContent); // 이 줄 추가
     return;
   }
+  //   let fixes = [];
+  //   try {
+  //     fixes = JSON.parse(fixesContent);
+  //   } catch {
+  //     console.log("FIXES 파싱 실패, 스킵");
+  //     return;
+  //   }
 
   if (!Array.isArray(fixes) || fixes.length === 0) {
     console.log("자동 수정 없음, 스킵");

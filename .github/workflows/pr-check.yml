@@ -28,11 +28,25 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      # - name: Type Check & Lint
+      #   # 에러 발생 시 로그를 화면에 출력함과 동시에 error.log 파일로 복사(tee)
+      #   run: pnpm turbo run check-types lint 2>&1 | tee error.log
+      #   continue-on-error: true # 에러가 나도 다음 단계(AI 분석)로 넘어가도록 설정
+      #   id: ci_step
       - name: Type Check & Lint
-        # 에러 발생 시 로그를 화면에 출력함과 동시에 error.log 파일로 복사(tee)
-        run: pnpm turbo run check-types lint 2>&1 | tee error.log
-        continue-on-error: true # 에러가 나도 다음 단계(AI 분석)로 넘어가도록 설정
         id: ci_step
+        continue-on-error: true # 에러가 나도 다음 단계(AI 분석)로 넘어가게 함
+        run: |
+          # 1. 터보레포 실행 후 로그를 파일에 씁니다
+          pnpm turbo run check-types lint > error.log 2>&1 || true
+
+          # 2. 실행 결과를 화면에 출력해서 우리가 볼 수 있게 합니다
+          cat error.log
+
+          # 3. pnpm 명령어의 실패 여부를 찾아내서 명시적으로 에러(1)를 던집니다
+          if grep -q "ERROR" error.log || grep -q "exited (1)" error.log; then
+            exit 1
+          fi
 
       - name: Claude Error Analysis & PR Comment
         # 이전 단계가 실패했을 때만 실행

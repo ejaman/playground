@@ -45,6 +45,8 @@ export default async function PostPage({
   const { slug } = await params;
   const post = publishedPosts.find((p) => p.id === slug);
 
+  const test: number = "test";
+
   if (!post) notFound();
 
   const headings = parseHeadingsFromHtml(post.body);
@@ -77,6 +79,7 @@ export default async function PostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {test}
       <PostContent
         title={post.title}
         date={post.date}

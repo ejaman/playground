@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 
 const CATEGORIES = [
@@ -18,7 +16,9 @@ export function CategoryFilter({ category }: CategoryFilterProps) {
     <div className="flex gap-2 mb-6">
       {CATEGORIES.map((cat) => {
         const href =
-          cat.value === "all" ? "/experiment" : `/experiment?category=${cat.value}`;
+          cat.value === "all"
+            ? "/experiment"
+            : `/experiment?category=${cat.value}`;
         const isActive = category === cat.value;
         return (
           <Link

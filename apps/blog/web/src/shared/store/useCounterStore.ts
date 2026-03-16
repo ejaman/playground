@@ -16,6 +16,7 @@ interface CartStore {
 
 export const useCartStore = create<CartStore>()(
   devtools(
+    // 로컬스토리지로 자동 저장
     persist(
       (set, get) => ({
         items: [],

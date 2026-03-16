@@ -1,0 +1,50 @@
+name: PR Check & Claude Error Analysis
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  CI-Check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # 코멘트 작성을 위한 명시적 권한
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4 # v4 최신 버전 권장
+        with:
+          version: 10.10.0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Type Check & Lint
+        # 에러 발생 시 로그를 화면에 출력함과 동시에 error.log 파일로 복사(tee)
+        run: pnpm turbo run check-types lint 2>&1 | tee error.log
+        continue-on-error: true # 에러가 나도 다음 단계(AI 분석)로 넘어가도록 설정
+        id: ci_step
+
+      - name: Claude Error Analysis & PR Comment
+        # 이전 단계가 실패했을 때만 실행
+        if: steps.ci_step.outcome == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node .github/scripts/analyze-error.js
+
+      - name: Fail the Job
+        # 코멘트를 단 후, 해당 CI 자체는 최종적으로 실패(빨간불) 처리
+        if: steps.ci_step.outcome == 'failure'
+        run: exit 1

@@ -20,6 +20,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.85",
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.3.1"
   },

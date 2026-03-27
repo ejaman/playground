@@ -119,6 +119,32 @@ published: true
 | `NEXT_PUBLIC_GA_ID`    | Google Analytics           | ✅   |
 | `ANTHROPIC_API_KEY`    | Claude API (포스트 생성용) | ❌   |
 
+## 디자인 시스템
+
+### 디자인 토큰
+
+디자인 토큰은 `src/app/styles/tokens.css`에 중앙화되어 관리됩니다:
+
+- **색상 토큰**: 기본 팔레트, 시맨틱 색상, 브랜드 색상
+- **타이포그래피**: Pretendard Sans, Geist Mono 폰트
+- **간격**: 1-24px 범위의 일관된 스페이싱
+- **반경**: sm/md/lg/xl 크기의 border-radius
+- **그림자**: sm부터 xl까지의 elevation 레벨
+- **애니메이션**: 트랜지션 및 키프레임 정의
+
+### 테마 연결
+
+- **라이트/다크 모드**: CSS 변수 기반 테마 전환
+- **Tailwind 통합**: `@theme inline`으로 디자인 토큰을 Tailwind에 연결
+- **컴포넌트**: shadcn/ui 기반 일관된 디자인 컴포넌트
+
+### 스타일링 원칙
+
+- **CSS 우선**: Tailwind CSS 클래스로 스타일링
+- **토큰 사용**: 직접 색상 값 대신 디자인 토큰 활용
+- **반응형**: 모바일 퍼스트 접근법
+- **접근성**: WCAG 2.1 AA 준수
+
 ## 개발 팁
 
 - **콘텐츠 미리보기**: `pnpm dev`로 로컬에서 확인

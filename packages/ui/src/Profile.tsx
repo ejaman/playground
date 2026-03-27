@@ -17,6 +17,14 @@ export interface ProfileProps {
   socials?: SocialLink[];
   skills?: string[];
   className?: string;
+  // Next.js 앱에서 Image 컴포넌트 사용을 위한 옵션
+  ImageComponent?: React.ComponentType<{
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    className?: string;
+  }>;
 }
 
 const SOCIAL_ICONS: Record<
@@ -41,18 +49,20 @@ export function Profile({
   socials = [],
   skills = [],
   className,
+  ImageComponent,
 }: ProfileProps) {
+  const Image = ImageComponent || "img";
+
   return (
     <div className={cn("rounded-2xl  bg-card/50 p-6", "flex gap-6", className)}>
       {/* 프로필 이미지 */}
       <div className="shrink-0">
-        <img
+        <Image
           src={image}
           alt={`${name} 프로필 이미지`}
           width={96}
           height={96}
           className="size-24 border border-border/60 object-cover ring-2 ring-border/50 shadow-md rounded-full"
-          style={{ borderRadius: "50%" }}
         />
       </div>
 

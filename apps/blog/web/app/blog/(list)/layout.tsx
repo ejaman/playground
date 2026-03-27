@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Profile } from "@repo/ui";
 import { TabLine } from "../../../src/entities/post/ui/TabLine";
 
@@ -17,6 +18,7 @@ export default function BlogLayout({
           { type: "github", url: "https://github.com/ejaman" },
           { type: "link", url: "https://velog.io/@ejaman/posts" },
         ]}
+        ImageComponent={Image}
       />
 
       <TabLine />

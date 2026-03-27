@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./tokens.css";
 
 @source "../../**/*.{ts,tsx}";
 @source "../../../app/**/*.{ts,tsx}";
@@ -31,74 +32,52 @@
   --color-destructive: var(--destructive);
 
   /* 브랜드·포인트 (라이트/다크 공통) */
-  --color-brand-primary: #3b82f6;
-  --color-brand-secondary: #6366f1;
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
   --color-point: var(--point);
   --color-point-foreground: var(--point-foreground);
   --color-point-background: var(--point-background);
 
   /* 타이포그래피 */
-  --font-sans: var(--pretendard), var(--font-geist-sans), sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* 간격 */
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+  --spacing-24: var(--space-24);
 
   /* 반경 */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* 그림자 */
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
 }
 
-/* ─── 라이트 모드 CSS 변수 ────────────────────────────────────── */
+/* ─── 라이트 모드 테마 오버라이드 ───────────────────────────── */
 :root {
-  --radius: 0.625rem;
-
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --primary: #0f172a;
-  --primary-foreground: #f8fafc;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f8fafc;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #94a3b8;
-
-  /* 포인트 색상 */
-  /* 라이트 모드 전용 (다크는 아래 .dark에서 기존 값 유지) */
-  --point: #258ceb;
-  --point-foreground: #0b1f3a;
-  --point-background: #e8f0ff;
+  --radius: var(--radius-lg);
 }
 
-/* ─── 다크 모드 CSS 변수 ─────────────────────────────────────── */
+/* ─── 다크 모드 테마 오버라이드 ─────────────────────────────── */
 .dark {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
-  --primary: #f8fafc;
-  --primary-foreground: #0f172a;
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-  --destructive: #f87171;
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #475569;
-
-  /* 포인트 색상 */
-  --point: #96d0ff;
-  --point-foreground: #1e3a4a;
-  --point-background: #1a2d38;
+  /* 다크 모드에서 필요한 오버라이드만 정의 */
 }
 
 /* ─── 기본 스타일 ────────────────────────────────────────────── */

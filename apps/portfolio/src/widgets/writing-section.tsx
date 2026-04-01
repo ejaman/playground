@@ -18,11 +18,11 @@ const PLACEHOLDER_ARTICLES = [
   },
 ] as const;
 
-function ArrowUpRight() {
+function ArrowRight() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M7 3H15V11" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      <line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M10 4L15 9L10 14" stroke="currentColor" strokeWidth="1.5" fill="none" />
     </svg>
   );
 }
@@ -30,22 +30,26 @@ function ArrowUpRight() {
 export function WritingSection() {
   return (
     <div>
-      <p className="text-label-sm mb-md">03 / WRITTEN ARTIFACTS</p>
+      {/* Label — mobile: JOURNAL / desktop: 03 / WRITTEN ARTIFACTS */}
+      <p className="text-label-sm mb-md">
+        <span className="md:hidden">JOURNAL</span>
+        <span className="hidden md:inline">03 / WRITTEN ARTIFACTS</span>
+      </p>
       <Line />
       <ul>
         {PLACEHOLDER_ARTICLES.map(({ date, title, description }) => (
           <li key={title}>
             <a
               href="#"
-              className="[margin-inline:-24px] flex items-start justify-between px-sm py-md hover:bg-neutral-100"
+              className="[margin-inline:-24px] flex items-center justify-between px-sm py-md hover:bg-neutral-100"
             >
               <div>
                 <p className="text-label-sm mb-xs text-neutral-800/40">{date}</p>
                 <h3 className="text-body-intro mb-xs">{title}</h3>
                 <p className="text-body-base text-neutral-800/60">{description}</p>
               </div>
-              <span className="mt-1 shrink-0">
-                <ArrowUpRight />
+              <span className="ml-sm shrink-0">
+                <ArrowRight />
               </span>
             </a>
             <Line />

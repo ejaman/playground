@@ -18,11 +18,25 @@ export function ProjectsSection() {
   return (
     <section aria-label="Selected Archives" className="py-lg" id="projects">
       <Container>
-        <div className="mb-lg flex items-center justify-between">
-          <p className="text-label-sm">02 / SELECTED ARCHIVES</p>
-          <p className="text-label-sm text-neutral-800/40">
-            SELECT TO EXPAND TECHNICAL SUMMARY
-          </p>
+        {/* Section header — mobile: ARCHIVE style / desktop: label style */}
+        <div className="mb-lg">
+          {/* Mobile */}
+          <div className="flex items-end justify-between md:hidden">
+            <div>
+              <p className="text-label-sm text-neutral-800/40">SELECTED WORKS</p>
+              <p className="text-headline-md">ARCHIVE</p>
+            </div>
+            <a href="#" className="text-label-sm border-b border-pure-black pb-0.5">
+              VIEW ALL (12)
+            </a>
+          </div>
+          {/* Desktop */}
+          <div className="hidden items-center justify-between md:flex">
+            <p className="text-label-sm">02 / SELECTED ARCHIVES</p>
+            <p className="text-label-sm text-neutral-800/40">
+              SELECT TO EXPAND TECHNICAL SUMMARY
+            </p>
+          </div>
         </div>
 
         <Line />
@@ -37,7 +51,7 @@ export function ProjectsSection() {
                   <span className="text-headline-md">{title}</span>
                 </div>
                 <div className="flex items-center gap-sm">
-                  <span className="text-label-sm">{category}</span>
+                  <span className="hidden text-label-sm md:block">{category}</span>
                   <ChevronDown />
                 </div>
               </div>

@@ -47,34 +47,46 @@
    TYPOGRAPHY UTILITIES: Swiss Authority Scale
    ───────────────────────────────────────────────────────── */
 
-/* "JIM" Logo — 160px / weight 700 / tracking -0.05em / UPPER */
+/* "JIM" Logo — mobile 72px → desktop 160px */
 @utility text-huge {
   font-family: var(--font-inter);
   font-weight: 700;
-  font-size: 160px;
+  font-size: 72px;
   line-height: 0.9;
   letter-spacing: -0.05em;
   text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 160px;
+  }
 }
 
-/* Philosophy Main Title — 72px / weight 700 / tracking -0.04em / UPPER */
+/* Philosophy Main Title — mobile 40px → desktop 72px */
 @utility text-display-lg {
   font-family: var(--font-inter);
   font-weight: 700;
-  font-size: 72px;
+  font-size: 40px;
   line-height: 1.1;
   letter-spacing: -0.04em;
   text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 72px;
+  }
 }
 
-/* Project / Article Titles — 48px / weight 700 / tracking -0.02em / UPPER */
+/* Project / Article Titles — mobile 28px → desktop 48px */
 @utility text-headline-md {
   font-family: var(--font-inter);
   font-weight: 700;
-  font-size: 48px;
+  font-size: 28px;
   line-height: 1.2;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 48px;
+  }
 }
 
 /* Hero Intro, Philosophy Body — 20px / weight 700 / Normal */

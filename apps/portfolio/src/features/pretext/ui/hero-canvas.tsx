@@ -13,13 +13,17 @@ export function HeroCanvas() {
       const lineHeight = Math.round(20 * 1.6);
 
       // 상하 여백: repelForce(30) 만큼 이동 공간 확보
-      const padX = 0;
-      const padY = 40;
+      const padY = 36;
+      // firstBaseline = padY + 실제 ascent (빈 공간 없이 텍스트 바로 시작)
+      ctx.font = font;
+      const ascent = ctx.measureText("H").actualBoundingBoxAscent;
+      const firstBaseline = padY + ascent;
+
       const { glyphs, endY } = layoutTextBlock(
         ctx,
         profile.heroIntro,
-        padX,
-        padY + lineHeight,
+        0,
+        firstBaseline,
         font,
         "#1B1B1B", // neutral-800
         W,

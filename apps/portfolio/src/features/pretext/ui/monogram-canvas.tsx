@@ -8,8 +8,16 @@ import { profile } from "@/content";
 export function MonogramCanvas() {
   const handleLayout = useCallback(
     (ctx: CanvasRenderingContext2D, W: number): RepelLayoutResult => {
-      // text-display-lg 수준(72px)으로 고정 — 긴 이름에도 영역 초과 없음
-      const fontSize = Math.min(72, W * 0.12); // 화면 폭에 따라 responsive
+      // 컨테이너 너비에 맞춰 폰트 크기 동적 계산 (최대 120px)
+      // padX 여백을 뺀 영역에 텍스트가 딱 맞도록 스케일
+      const padX = 60;
+      const maxFont = 120;
+      ctx.font = `700 ${maxFont}px Inter, sans-serif`;
+      const rawWidth = ctx.measureText(profile.monogram).width;
+      const availableW = W - padX * 2;
+      const fontSize = rawWidth > availableW
+        ? Math.floor(maxFont * (availableW / rawWidth))
+        : maxFont;
       const font = `700 ${fontSize}px Inter, sans-serif`;
 
       ctx.font = font;
@@ -18,8 +26,7 @@ export function MonogramCanvas() {
       const descent = metrics.actualBoundingBoxDescent;
       const textWidth = metrics.width;
 
-      // repelForce=50이므로 글자가 최대 ~50px 이동 → 여백을 충분히 확보
-      const padX = 60;
+      // repelForce=50이므로 글자가 최대 ~50px 이동 → 상하 여백 확보
       const padY = 60;
 
       const baseline = padY + ascent;

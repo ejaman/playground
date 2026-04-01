@@ -10,7 +10,7 @@ export function MonogramCanvas() {
     (ctx: CanvasRenderingContext2D, W: number): RepelLayoutResult => {
       // 컨테이너 너비에 맞춰 폰트 크기 동적 계산 (최대 120px)
       // padX 여백을 뺀 영역에 텍스트가 딱 맞도록 스케일
-      const padX = 60;
+      const padX = 20;
       const maxFont = 120;
       ctx.font = `700 ${maxFont}px Inter, sans-serif`;
       const rawWidth = ctx.measureText(profile.monogram).width;

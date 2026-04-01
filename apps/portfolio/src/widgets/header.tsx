@@ -1,4 +1,5 @@
 import { Container, Line } from "@/shared/ui";
+import { profile } from "@/content";
 
 const NAV_ITEMS = ["HOME", "PROJECTS", "BLOG", "ABOUT"] as const;
 
@@ -26,17 +27,15 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-pure-white">
       <Container>
         <div className="flex items-center justify-between py-xs">
-          {/* Mobile: [JIM] 박스 로고 / Desktop: CURATOR 텍스트 */}
           <div>
             <span className="hidden text-label-sm font-bold tracking-[0.2em] md:block">
-              CURATOR
+              {profile.brandName}
             </span>
             <span className="border border-pure-black px-xs py-1 text-label-sm font-bold md:hidden">
-              [JIM]
+              [{profile.monogram}]
             </span>
           </div>
 
-          {/* Desktop nav */}
           <nav className="hidden items-center gap-md md:flex" aria-label="주요 메뉴">
             {NAV_ITEMS.map((item, i) => (
               <a
@@ -51,19 +50,16 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Right icons */}
           <div className="flex items-center gap-sm">
-            {/* Mobile only: search icon */}
             <button
               aria-label="검색"
-              className="cursor-pointer hover:bg-pure-black hover:text-pure-white p-1 md:hidden"
+              className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white md:hidden"
             >
               <SearchIcon />
             </button>
-            {/* Hamburger (both) */}
             <button
               aria-label="메뉴 열기"
-              className="cursor-pointer hover:bg-pure-black hover:text-pure-white p-1"
+              className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white"
             >
               <HamburgerIcon />
             </button>

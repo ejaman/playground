@@ -9,9 +9,11 @@ export function PhilosophyCanvas() {
   const handleLayout = useCallback(
     (ctx: CanvasRenderingContext2D, W: number): RepelLayoutResult => {
       const GAP = 160; // gap-xl
-      const colW = Math.floor((W - GAP) / 2);
-      const lx = 0;
-      const rx = colW + GAP;
+      const padX = 32; // repulsion 클리핑 방지 좌우 여백
+      const padY = 32; // 상하 여백
+      const colW = Math.floor((W - GAP) / 2) - padX;
+      const lx = padX;
+      const rx = lx + colW + GAP;
 
       const titleF = '700 72px Inter, sans-serif';
       const titleLH = Math.round(72 * 1.1);
@@ -27,7 +29,7 @@ export function PhilosophyCanvas() {
 
       // ── Left: Title ──
       const { glyphs: tg, endY: tEndY } = layoutTextBlock(
-        ctx, philosophy.title, lx, titleLH, titleF, "#FFFFFF", colW, titleLH,
+        ctx, philosophy.title, lx, padY + titleLH, titleF, "#FFFFFF", colW, titleLH,
       );
       glyphs.push(...tg);
       let ly = tEndY + 48;
@@ -45,7 +47,7 @@ export function PhilosophyCanvas() {
 
       // ── Right: Body ──
       const { glyphs: bg, endY: bEndY } = layoutTextBlock(
-        ctx, philosophy.body, rx, bodyLH, bodyF, "#FFFFFF", colW, bodyLH,
+        ctx, philosophy.body, rx, padY + bodyLH, bodyF, "#FFFFFF", colW, bodyLH,
       );
       glyphs.push(...bg);
 
@@ -67,7 +69,7 @@ export function PhilosophyCanvas() {
       const { glyphs: ovg } = layoutTextBlock(ctx, philosophy.output, outputX, metaY + labelLH + 4, monoF, "#FFFFFF", halfW, monoLH);
       glyphs.push(...ovg);
 
-      return { glyphs, segs, height: metaY + monoLH + 24 };
+      return { glyphs, segs, height: metaY + monoLH + padY };
     },
     [],
   );

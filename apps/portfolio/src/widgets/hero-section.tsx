@@ -1,6 +1,6 @@
 import { Container, Line } from "@/shared/ui";
 import { ChatTrigger } from "@/features/chatbot";
-import { HeroCanvas, MonogramCanvas } from "@/features/pretext";
+import { MonogramCanvas } from "@/features/pretext";
 import { profile } from "@/content";
 
 export function HeroSection() {
@@ -9,7 +9,6 @@ export function HeroSection() {
       <Container>
         <p className="text-label-sm mb-sm">
           <span className="md:hidden">PORTFOLIO // 2026</span>
-          <span className="hidden md:inline">01 / IDENTITY</span>
         </p>
 
         {/* 모바일: 일반 h1 / 데스크탑: canvas repulsion */}
@@ -48,11 +47,11 @@ export function HeroSection() {
 
         <div className="pb-lg md:grid md:grid-cols-5 md:items-start md:pb-xl">
           {/* pt-[32px]: HeroCanvas의 padYTop과 맞춤 */}
-          <div className="md:col-span-3 md:pt-[32px]">
+          <div className="md:col-span-3 md:pt-[32px] md:pr-[32px]">
             <ChatTrigger />
           </div>
           <div className="hidden md:col-span-2 md:block">
-            <HeroCanvas />
+            {/* <HeroCanvas /> */}
           </div>
         </div>
       </Container>

@@ -13,11 +13,13 @@ export function HeroCanvas() {
       const lineHeight = Math.round(20 * 1.6);
 
       const padX = 16; // 좌측 여백
-      const padY = 20; // 상하 여백 (repelForce=30 이동 공간)
+      // 상단은 래퍼 CSS padding으로 맞추므로 캔버스 내부 상단 패딩 없음
+      // 하단만 repelForce(30) 이동 공간 확보
+      const padYBottom = 32;
 
       ctx.font = font;
       const ascent = ctx.measureText("H").actualBoundingBoxAscent;
-      const firstBaseline = padY + ascent;
+      const firstBaseline = ascent; // 캔버스 상단 = 텍스트 상단
 
       const { glyphs, endY } = layoutTextBlock(
         ctx,
@@ -30,7 +32,7 @@ export function HeroCanvas() {
         lineHeight,
       );
 
-      return { glyphs, height: endY + padY };
+      return { glyphs, height: endY + padYBottom };
     },
     [],
   );

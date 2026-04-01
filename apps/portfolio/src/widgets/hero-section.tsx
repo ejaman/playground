@@ -46,11 +46,11 @@ export function HeroSection() {
 
         <Line className="my-sm" />
 
-        <div className="pb-lg md:grid md:grid-cols-5 md:pb-xl">
+        <div className="pb-lg md:grid md:grid-cols-5 md:items-start md:pb-xl">
           <div className="md:col-span-3">
             <ChatTrigger />
           </div>
-          <div className="hidden md:col-span-2 md:flex md:items-center">
+          <div className="hidden md:col-span-2 md:block">
             <HeroCanvas />
           </div>
         </div>

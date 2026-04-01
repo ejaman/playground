@@ -1,128 +1,67 @@
-# CLAUDE.md (포트폴리오 앱)
+# CLAUDE.md (Portfolio App)
 
-This file provides guidance to Claude Code (claude.ai/code) when working with the portfolio app.
+이 파일은 `apps/portfolio` 프로젝트에 특화된 가이드를 제공하며, 최상위 `CLAUDE.md`의 공통 아키텍처 및 규칙을 상속한다.
 
-## 아키텍처 (포트폴리오 특화)
+## 1. 아키텍처 및 폴더 구조 (FSD 준수)
 
-### 기술 스택
-
-- **Framework**: Next.js 15 (App Router), React 19
-- **Build Tool**: Turbopack (dev), Webpack (prod)
-- **Analytics**: Google Analytics 4
-
-### 폴더 구조 (Feature-Sliced Design)
+공통 규칙에 따라 **Feature-Sliced Design**을 엄격히 준수한다. 의존성은 상위 레이어에서 하위 레이어로만 흐른다.
 
 ```
 apps/portfolio/src/
-├── app/           # Next.js App Router: pages, layouts, metadata
-│   └── page.tsx   # 메인 포트폴리오 페이지
-├── shared/        # 횡단 관심사: ui/, hooks/, lib/, api/, store/, assets/
-│   ├── ui/        # 디자인 시스템 컴포넌트 (@repo/ui)
-│   ├── hooks/     # 범용 React hooks
-│   ├── lib/       # 유틸리티 함수, 설정
-│   ├── api/       # 외부 API 클라이언트
-│   ├── store/     # 전역 상태 (Zustand)
-│   └── assets/    # 정적 파일, 아이콘, 폰트
-├── entities/      # 도메인 모델: project/, skill/, experience/
-│   ├── project/   # 프로젝트 관련 타입, API, 비즈니스 로직
-│   ├── skill/     # 기술 스킬 관련 타입, API, 비즈니스 로직
-│   └── experience/ # 경력 관련 타입, API, 비즈니스 로직
-├── features/      # 사용자 상호작용: contact/, projects/, skills/
-└── widgets/       # 페이지 섹션: header/, footer/, hero/
+├── app/           # Next.js App Router (Single Page: page.tsx)
+├── shared/        # 프리미티브 UI (@repo/ui), Hooks, Lib, Assets
+├── entities/      # Project, Experience 등 도메인 데이터 모델 및 타입
+├── features/      # AI Chatbot 인터랙션, Pretext 파서 로직
+├── widgets/       # Hero, Philosophy, Projects, About 섹션 단위
+└── content/       # (독자적) 포트폴리오용 Markdown/JSON 데이터 자산
 ```
 
-**경로 별칭:**
+## 2. 디자인 시스템 (DESIGN.md 참조 필수)
 
-- `@/*` → `src/*`
+모든 시각적 구현은 루트의 **`DESIGN.md` (Monochromatic Manifesto)**를 절대적으로 따른다.
 
-## 빌드/테스트 (포트폴리오 전용)
+- **Color**: Absolute Binary (`#000000`, `#FFFFFF`). Tonal Gray는 레이어링용으로만 제한적 사용.
+- **Typography**: Headlines(**Inter**), Metadata/Technical(**JetBrains Mono**).
+- **Radius**: 모든 요소의 Border-radius는 **`0px`**로 고정한다.
+- **Interaction**: Hover 시 **Invert(색상 반전)** 효과를 기본으로 적용한다.
 
-### 개발 서버
+## 3. 핵심 기능 구현 지침
 
-```bash
-pnpm dev            # Next.js dev (port 3001)
-pnpm build          # Next.js 빌드
-pnpm preview        # 프로덕션 빌드 미리보기
-```
+### ① Pretext Renderer (features/pretext)
 
-### 테스트
+- `pretext` 계층 데이터를 시각화하는 커스텀 렌더러를 구축한다.
+- 왼쪽 수직선(Border)과 들여쓰기(Indentation)를 통해 사고의 위계를 시각적으로 증명한다.
 
-```bash
-pnpm test           # Vitest 단일 실행
-pnpm test:watch     # Vitest 감시 모드
-pnpm test:coverage  # 커버리지 리포트
-```
+### ② AI Chatbot (features/chatbot)
 
-### 배포
+- `Cmd+K` 단축키로 활성화되는 검색창 UI 기반 인터페이스.
+- **RAG 전략**: `content/` 폴더 내의 Markdown 데이터를 컨텍스트로 주입하여 답변을 생성한다.
+  - 이 과정은 서버에서만 일어나므로 데이터 원본이 클라이언트에 노출되지 않는다.
 
-- **환경**: 프로덕션은 `NEXT_PUBLIC_BASE_URL` 기준
-- **특징**: 정적 콘텐츠 기반 포트폴리오 사이트
+## 4. 포트폴리오 앱 절대 규칙 (Specific Rules)
 
-## 도메인 컨텍스트 (포트폴리오)
+최상위 `CLAUDE.md`의 규칙에 더해 아래 사항을 추가로 준수한다.
 
-### 비즈니스 용어
+- **지속 가능성(Sustainability)**: 기술 부채를 방지하기 위해 과도한 라이브러리 사용을 지양하고 순수 CSS/TS 로직을 우선한다.
+- **성능 최적화 (300KB/LCP)**:
+  - 전체 초기 번들 크기(Gzipped)를 **300KB 이하**로 유지한다.
+  - 이미지 사용은 사이트 전체에서 **최대 3개**로 제한하며, 모두 `next/image`를 사용한다.
+- **사실 중심 콘텐츠**: 주관적 수식어를 배제하고 엔지니어링 성과와 데이터 위주로 서술한다.
 
-- **Project**: 포트폴리오에展示할 프로젝트
-  - 속성: `title`, `description`, `technologies`, `githubUrl`, `liveUrl`, `featured`
-- **Skill**: 보유 기술 스택
-  - 카테고리: `frontend`, `backend`, `tools`, `design`
-- **Experience**: 경력 및 교육 배경
+## 5. 작업 및 커밋 워크플로우
 
-### 데이터 흐름
+### 기능 단위 개발 (Atomic Development)
 
-1. **콘텐츠 관리**: 정적 데이터 또는 Supabase에서 프로젝트 정보 관리
-2. **서버 상태**: React Query로 외부 API 데이터 fetch
-3. **클라이언트 상태**: Zustand로 UI 상태 관리
-4. **인증**: 필요시 Supabase Auth로 관리자 기능
+- 모든 작업은 `TODO.md`의 미완료 항목(`- [ ]`) 중 가장 우선순위가 높은 **기능 단위**로 진행한다.
+- **커밋 시점**: 하나의 논리적 기능 구현이 완료되고 `TODO.md`를 업데이트한 직후 수행한다.
+- **커밋 메시지**: 최상위 규칙을 따르되, 앱 이름을 명시한다 (예: `feat(portfolio): ...`).
 
-### 주요 워크플로우
+### 세션 및 TODO 관리
 
-- **프로젝트 추가**: 새로운 프로젝트 정보 입력/수정
-- **기술 스택 업데이트**: 보유 기술 정보 관리
-- **SEO 최적화**: 메타 태그 및 구조화된 데이터 활용
+- **세션 시작**: 루트의 `TODO.md`를 먼저 읽고 현재 상황을 브리핑한다.
+- **세션 종료**: 작업 요약을 `TODO.md`에 기록하고 세션을 마무리한다.
 
-## 콘텐츠 관리
+## 6. 개발 커뮤니케이션
 
-### 프로젝트 데이터 구조
-
-```typescript
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  featured: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-
-### 기술 스택 카테고리
-
-```typescript
-type SkillCategory = "frontend" | "backend" | "tools" | "design";
-
-interface Skill {
-  id: string;
-  name: string;
-  category: SkillCategory;
-  proficiency: number; // 1-5
-  icon?: string;
-}
-```
-
-## 환경변수 (포트폴리오 전용)
-
-| 변수                   | 목적             | 필수 |
-| ---------------------- | ---------------- | ---- |
-| `NEXT_PUBLIC_BASE_URL` | 프로덕션 URL     | ✅   |
-| `NEXT_PUBLIC_GA_ID`    | Google Analytics | ✅   |
-
-## 개발 팁
-
-- **레이아웃 확인**: 다양한 화면 크기에서 반응형 디자인 테스트
-- **성능 최적화**: 이미지 최적화 및 로딩 성능 확인
-- **접근성**: 키보드 내비게이션 및 스크린 리더 지원 확인
-- **SEO**: 메타 태그, 구조화된 데이터, Core Web Vitals 점수 확인
+- Claude는 작업을 시작하기 전, `DESIGN.md`에서 현재 구현할 컴포넌트의 명세(간격, 폰트 등)를 먼저 확인한다.
+- 성능 지표(LCP)에 영향을 줄 수 있는 라이브러리 추가 요청이 있을 경우, 반드시 사용자에게 성능적 대안을 먼저 제시한다.

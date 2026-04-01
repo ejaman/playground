@@ -14,7 +14,7 @@
 
 - [x] **Design Token Sync**: `DESIGN.md` 기반 Tailwind Config 설정 (Binary Colors, 0px Radius)
 - [x] **Base Style**: 글로벌 폰트(Inter, JetBrains Mono) 및 CSS 기본 룰 적용
-- [ ] **Atomic UI Primitives**: Button(Invert), Line, Input(Underline style), Container 개발
+- [x] **Atomic UI Primitives**: Button(Invert), Line, Input(Underline style), Container 개발
 
 ## 🎨 Phase 2: Visual Shell (Developer Check Milestone)
 

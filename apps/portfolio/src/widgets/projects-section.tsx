@@ -31,7 +31,7 @@ export function ProjectsSection() {
           {PLACEHOLDER_PROJECTS.map(({ id, title, category }) => (
             <li key={id}>
               {/* TODO(Phase 4): accordion expand on click */}
-              <div className="-mx-6 flex cursor-pointer items-center justify-between px-sm py-md hover:bg-neutral-100">
+              <div className="[margin-inline:-24px] flex cursor-pointer items-center justify-between px-sm py-md hover:bg-neutral-100">
                 <div className="flex items-baseline gap-sm">
                   <span className="text-label-sm text-neutral-800/40">{id}</span>
                   <span className="text-headline-md">{title}</span>

@@ -1,5 +1,6 @@
 import { Container, Line } from "@/shared/ui";
 import { ChatTrigger } from "@/features/chatbot";
+import { HeroCanvas } from "@/features/pretext";
 import { profile } from "@/content";
 
 export function HeroSection() {
@@ -22,9 +23,7 @@ export function HeroSection() {
             <ChatTrigger />
           </div>
           <div className="hidden md:col-span-1 md:flex md:items-center">
-            <p className="text-body-intro uppercase leading-tight">
-              {profile.heroIntro}
-            </p>
+            <HeroCanvas />
           </div>
         </div>
       </Container>

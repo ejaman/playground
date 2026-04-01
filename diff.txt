@@ -1,39 +1,12 @@
-diff --git a/.github/scripts/code-review.js b/.github/scripts/code-review.js
-index 1eb5070..566656e 100644
---- a/.github/scripts/code-review.js
-+++ b/.github/scripts/code-review.js
-@@ -102,9 +102,12 @@ async function run() {
-   // 6. 자동 수정 커밋 (빈 배열이 아닐 때만)
-   let fixes = [];
-   try {
--    fixes = JSON.parse(fixesContent);
-+    // 코드블록 제거 후 파싱
-+    const cleanJson = fixesContent.replace(/```json\n?|\n?```/g, "").trim();
-+    fixes = JSON.parse(cleanJson);
-   } catch {
-     console.log("FIXES 파싱 실패, 스킵");
-+    console.log("FIXES 원본:", fixesContent);
-     return;
-   }
- 
 diff --git a/apps/blog/web/app/blog/posts/[slug]/page.tsx b/apps/blog/web/app/blog/posts/[slug]/page.tsx
-index 15de41d..e2d65dc 100644
+index 15de41d..024312a 100644
 --- a/apps/blog/web/app/blog/posts/[slug]/page.tsx
 +++ b/apps/blog/web/app/blog/posts/[slug]/page.tsx
-@@ -45,6 +45,8 @@ export default async function PostPage({
+@@ -44,6 +44,7 @@ export default async function PostPage({
+ }) {
    const { slug } = await params;
    const post = publishedPosts.find((p) => p.id === slug);
- 
 +  const test: number = "test";
-+
+ 
    if (!post) notFound();
  
-   const headings = parseHeadingsFromHtml(post.body);
-@@ -77,6 +79,7 @@ export default async function PostPage({
-         type="application/ld+json"
-         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-       />
-+      {test}
-       <PostContent
-         title={post.title}
-         date={post.date}

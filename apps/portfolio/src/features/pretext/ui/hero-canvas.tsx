@@ -12,20 +12,21 @@ export function HeroCanvas() {
       const font = "700 20px Inter, sans-serif";
       const lineHeight = Math.round(20 * 1.6);
 
-      // REPEL_F(30) 만큼 글자가 밀릴 수 있으므로 양쪽 여백 확보
-      const padX = 50;
+      // 상하 여백: repelForce(30) 만큼 이동 공간 확보
+      const padX = 0;
+      const padY = 40;
       const { glyphs, endY } = layoutTextBlock(
         ctx,
-        profile.heroIntro.toUpperCase(),
+        profile.heroIntro,
         padX,
-        lineHeight,
+        padY + lineHeight,
         font,
         "#1B1B1B", // neutral-800
-        W - padX * 1.5,
+        W,
         lineHeight,
       );
 
-      return { glyphs, height: endY };
+      return { glyphs, height: endY + padY };
     },
     [],
   );

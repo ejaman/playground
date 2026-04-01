@@ -8,8 +8,8 @@ import { profile } from "@/content";
 export function MonogramCanvas() {
   const handleLayout = useCallback(
     (ctx: CanvasRenderingContext2D, W: number): RepelLayoutResult => {
-      // text-huge: 160px Inter 700, lh 0.9 (desktop)
-      const fontSize = Math.min(160, W * 0.22); // 화면 폭에 따라 responsive
+      // text-display-lg 수준(72px)으로 고정 — 긴 이름에도 영역 초과 없음
+      const fontSize = Math.min(72, W * 0.12); // 화면 폭에 따라 responsive
       const font = `700 ${fontSize}px Inter, sans-serif`;
 
       ctx.font = font;

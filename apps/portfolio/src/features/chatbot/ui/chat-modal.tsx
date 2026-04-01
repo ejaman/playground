@@ -22,9 +22,7 @@ const MOCK = {
     "Recommendation: Proceed with recruitment for high-complexity visual systems requiring a balance of artistic rigor and technical scalability.",
 };
 
-type ModalState =
-  | { phase: "idle" }
-  | { phase: "responded"; query: string };
+type ModalState = { phase: "idle" } | { phase: "responded"; query: string };
 
 type ChatModalProps = {
   onClose: () => void;
@@ -70,35 +68,38 @@ export function ChatModal({ onClose }: ChatModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-pure-black/60"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label="System Query"
-        className="flex w-full max-w-3xl flex-col bg-pure-black text-pure-white"
+        className="flex w-full max-w-[48rem] flex-col bg-pure-black text-pure-white"
         style={{ maxHeight: "85vh" }}
       >
         {/* ── Title bar ─────────────────────────────────────── */}
-        <div className="flex items-center justify-between border-b border-pure-white/20 px-sm py-xs">
+        <div className="flex items-center justify-between border-b border-white/20 px-sm py-xs">
           <div className="flex items-center gap-xs">
-            {(["bg-[#ff5f57]", "bg-[#febc2e]", "bg-[#28c840]"] as const).map(
-              (color, i) => (
-                <span
-                  key={i}
-                  className={`inline-block h-3 w-3 ${color}`}
-                  aria-hidden="true"
-                />
-              )
-            )}
+            <span
+              className={`inline-block h-3 w-3 bg-white/30`}
+              aria-hidden="true"
+            />{" "}
+            <span
+              className={`inline-block h-3 w-3 bg-white/30`}
+              aria-hidden="true"
+            />
+            <span
+              className={`inline-block h-3 w-3 bg-white/30`}
+              aria-hidden="true"
+            />
           </div>
-          <span className="text-label-sm text-pure-white/60">
+          <span className="text-label-sm text-white/60">
             SYSTEM_QUERY // EXPERIENCE_RETRIEVAL
           </span>
           <button
             onClick={onClose}
             aria-label="닫기"
-            className="text-label-sm text-pure-white/60 hover:text-pure-white"
+            className="text-label-sm text-white/60 hover:text-pure-white"
           >
             ×
           </button>
@@ -109,14 +110,16 @@ export function ChatModal({ onClose }: ChatModalProps) {
           {state.phase === "idle" ? (
             /* 입력 대기 상태 */
             <div className="flex items-start gap-xs">
-              <span className="text-mono-base text-pure-white/60 shrink-0">&gt;</span>
+              <span className="text-mono-base text-white/60 shrink-0">
+                &gt;
+              </span>
               <input
                 ref={inputRef}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Query Jim's experience..."
-                className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-pure-white/30"
+                className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-white/30"
               />
             </div>
           ) : (
@@ -124,13 +127,13 @@ export function ChatModal({ onClose }: ChatModalProps) {
             <div className="flex flex-col gap-md">
               {/* User query */}
               <p className="text-mono-base">
-                <span className="text-pure-white/50">&gt; USER_QUERY: </span>
-                <span className="text-pure-white">"{state.query}"</span>
+                <span className="text-white/50">&gt; USER_QUERY: </span>
+                <span className="text-pure-white">&quot;{state.query}&quot;</span>
               </p>
 
               {/* Result label + body */}
               <div>
-                <p className="text-label-sm mb-sm text-pure-white/50">
+                <p className="text-label-sm mb-sm text-white/50">
                   {MOCK.resultLabel}
                 </p>
                 <p className="text-[18px] leading-relaxed text-pure-white">
@@ -140,8 +143,8 @@ export function ChatModal({ onClose }: ChatModalProps) {
 
               {/* Data panels */}
               <div className="grid grid-cols-2 gap-sm">
-                <div className="border border-pure-white/20 p-sm">
-                  <p className="text-label-sm mb-sm text-pure-white/60">
+                <div className="border border-white/20 p-sm">
+                  <p className="text-label-sm mb-sm text-white/60">
                     ⁃: CORE_COMPETENCIES
                   </p>
                   <ul className="flex flex-col gap-xs">
@@ -151,13 +154,13 @@ export function ChatModal({ onClose }: ChatModalProps) {
                         className="text-mono-base flex justify-between"
                       >
                         <span>{skill}</span>
-                        <span className="text-pure-white/60">{pct}</span>
+                        <span className="text-white/60">{pct}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="border border-pure-white/20 p-sm">
-                  <p className="text-label-sm mb-sm text-pure-white/60">
+                <div className="border border-white/20 p-sm">
+                  <p className="text-label-sm mb-sm text-white/60">
                     ◎ MILESTONES
                   </p>
                   <ul className="flex flex-col gap-xs">
@@ -172,16 +175,16 @@ export function ChatModal({ onClose }: ChatModalProps) {
 
               {/* Conclusion */}
               <div>
-                <p className="text-label-sm mb-xs text-pure-white/50">
+                <p className="text-label-sm mb-xs text-white/50">
                   CONCLUSION //
                 </p>
-                <p className="text-mono-base italic text-pure-white/80">
+                <p className="text-mono-base italic text-white/80">
                   {MOCK.conclusion}
                 </p>
               </div>
 
               {/* Awaiting cursor */}
-              <div className="flex items-center gap-xs text-pure-white/40">
+              <div className="flex items-center gap-xs text-white/40">
                 <span className="animate-pulse text-lg leading-none">▌</span>
                 <span className="text-label-sm">AWAITING_INPUT...</span>
               </div>
@@ -190,11 +193,11 @@ export function ChatModal({ onClose }: ChatModalProps) {
         </div>
 
         {/* ── Footer actions ────────────────────────────────── */}
-        <div className="grid grid-cols-2 border-t border-pure-white/20">
-          <button className="text-label-sm flex items-center justify-center gap-xs border-r border-pure-white/20 py-sm text-pure-white hover:bg-pure-white hover:text-pure-black">
+        <div className="grid grid-cols-2 border-t border-white/20">
+          <button className="text-label-sm flex items-center justify-center gap-xs border-r border-white/20 py-sm text-white/60 hover:bg-white/10 hover:text-pure-white">
             <span aria-hidden="true">↓</span> DOWNLOAD_CV.PDF
           </button>
-          <button className="text-label-sm flex items-center justify-center gap-xs py-sm text-pure-white hover:bg-pure-white hover:text-pure-black">
+          <button className="text-label-sm flex items-center justify-center gap-xs py-sm text-white/60 hover:bg-white/10 hover:text-pure-white">
             <span aria-hidden="true">✉</span> REACH_OUT
           </button>
         </div>

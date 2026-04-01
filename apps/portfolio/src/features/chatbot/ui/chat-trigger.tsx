@@ -37,7 +37,7 @@ export function ChatTrigger() {
         aria-label="Jim에게 질문하기 (Cmd+K)"
         className="flex w-full cursor-pointer items-center justify-between border border-pure-black px-sm py-xs text-left hover:bg-neutral-100"
       >
-        <span className="text-mono-base text-pure-black/35">
+        <span className="text-mono-base text-black/35">
           Ask Jim about his experience...
         </span>
         <SearchIcon />

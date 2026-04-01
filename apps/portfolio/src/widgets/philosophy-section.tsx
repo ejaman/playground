@@ -10,7 +10,7 @@ export function PhilosophySection() {
   return (
     <section aria-label="Core Philosophy" className="bg-pure-black py-xl">
       <Container>
-        <p className="text-label-sm mb-lg text-pure-white/50">CORE PHILOSOPHY</p>
+        <p className="text-label-sm mb-lg text-white/50">CORE PHILOSOPHY</p>
 
         <div className="grid grid-cols-2 gap-xl">
           {/* Left: title + principles */}
@@ -22,7 +22,7 @@ export function PhilosophySection() {
               {PRINCIPLES.map((p) => (
                 <li
                   key={p}
-                  className="text-label-sm border-l-2 border-pure-white pl-sm text-pure-white/80"
+                  className="text-label-sm border-l-2 border-pure-white pl-sm text-white/80"
                 >
                   {p}
                 </li>
@@ -37,14 +37,14 @@ export function PhilosophySection() {
               element pushing the limits of the digital gallery.
             </p>
             <div>
-              <div className="mb-sm h-px w-full bg-pure-white/20" />
+              <div className="mb-sm h-px w-full bg-white/20" />
               <div className="grid grid-cols-2 gap-md">
                 <div>
-                  <p className="text-label-sm mb-xs text-pure-white/40">METHODOLOGY</p>
+                  <p className="text-label-sm mb-xs text-white/40">METHODOLOGY</p>
                   <p className="text-mono-base text-pure-white">SWISS MINIMALISM</p>
                 </div>
                 <div>
-                  <p className="text-label-sm mb-xs text-pure-white/40">OUTPUT</p>
+                  <p className="text-label-sm mb-xs text-white/40">OUTPUT</p>
                   <p className="text-mono-base text-pure-white">TECHNICAL ARCHIVES</p>
                 </div>
               </div>

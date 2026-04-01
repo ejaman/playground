@@ -37,7 +37,7 @@ export function WritingSection() {
           <li key={title}>
             <a
               href="#"
-              className="-mx-sm flex items-start justify-between px-sm py-md hover:bg-neutral-100"
+              className="-mx-6 flex items-start justify-between px-sm py-md hover:bg-neutral-100"
             >
               <div>
                 <p className="text-label-sm mb-xs text-neutral-800/40">{date}</p>

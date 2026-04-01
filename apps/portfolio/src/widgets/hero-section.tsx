@@ -1,6 +1,6 @@
 import { Container, Line } from "@/shared/ui";
 import { ChatTrigger } from "@/features/chatbot";
-import { HeroCanvas } from "@/features/pretext";
+import { HeroCanvas, MonogramCanvas } from "@/features/pretext";
 import { profile } from "@/content";
 
 export function HeroSection() {
@@ -12,17 +12,23 @@ export function HeroSection() {
           <span className="hidden md:inline">01 / IDENTITY</span>
         </p>
 
-        <h1 className="text-huge leading-none">{profile.monogram}</h1>
+        {/* 모바일: 일반 h1 / 데스크탑: canvas repulsion */}
+        <h1 className="text-huge leading-none md:hidden">{profile.monogram}</h1>
+        <div className="hidden md:block" aria-hidden="true">
+          <MonogramCanvas />
+        </div>
 
-        <p className="text-body-base mt-xs mb-sm md:hidden">{profile.subtitle}</p>
+        <p className="text-body-base mt-xs mb-sm md:hidden">
+          {profile.subtitle}
+        </p>
 
         <Line className="my-sm" />
 
-        <div className="pb-lg md:grid md:grid-cols-3 md:gap-md md:pb-xl">
-          <div className="md:col-span-2">
+        <div className="pb-lg md:grid md:grid-cols-5  md:pb-xl">
+          <div className="md:col-span-3">
             <ChatTrigger />
           </div>
-          <div className="hidden md:col-span-1 md:flex md:items-center">
+          <div className="hidden md:col-span-2 md:flex md:items-center">
             <HeroCanvas />
           </div>
         </div>

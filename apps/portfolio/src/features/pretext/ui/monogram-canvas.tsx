@@ -12,35 +12,35 @@ export function MonogramCanvas() {
       const fontSize = Math.min(160, W * 0.22); // 화면 폭에 따라 responsive
       const font = `700 ${fontSize}px Inter, sans-serif`;
 
-      // 글자 높이를 canvas measureText로 정확히 계산
       ctx.font = font;
       const metrics = ctx.measureText(profile.monogram);
       const ascent = metrics.actualBoundingBoxAscent;
       const descent = metrics.actualBoundingBoxDescent;
-      const padY = 20; // 상하 여백 (글자 이동 공간)
+      const textWidth = metrics.width;
+
+      // repelForce=50이므로 글자가 최대 ~50px 이동 → 여백을 충분히 확보
+      const padX = 60;
+      const padY = 60;
 
       const baseline = padY + ascent;
       const height = Math.ceil(baseline + descent + padY);
+      const width = Math.ceil(textWidth + padX * 2);
 
       const glyphs = measureGlyphs(
         ctx,
         profile.monogram,
-        0,
+        padX,
         baseline,
         font,
         "#1B1B1B", // neutral-800
       );
 
-      return { glyphs, height };
+      return { glyphs, height, width };
     },
     [],
   );
 
   return (
-    <RepelCanvas
-      onLayout={handleLayout}
-      repelRadius={150}
-      repelForce={50}
-    />
+    <RepelCanvas onLayout={handleLayout} repelRadius={150} repelForce={50} />
   );
 }

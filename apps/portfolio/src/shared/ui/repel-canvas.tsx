@@ -30,6 +30,8 @@ export type RepelLayoutResult = {
   glyphs: RepelGlyph[];
   segs?: RepelSeg[];
   height: number;
+  /** 지정하면 캔버스 너비를 컨테이너 대신 이 값으로 고정한다 */
+  width?: number;
 };
 
 // ── Layout helpers (export for consumers' onLayout callbacks) ─────────────────
@@ -125,6 +127,7 @@ export function RepelCanvas({
       glyphs = result.glyphs;
       segs = result.segs ?? [];
       H = result.height;
+      if (result.width !== undefined) W = result.width;
 
       el.width = Math.round(W * dpr);
       el.height = Math.round(H * dpr);

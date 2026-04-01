@@ -185,9 +185,15 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.2.1
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -203,6 +209,9 @@ importers:
       eslint-plugin-tailwind-v4:
         specifier: ^1.1.1
         version: 1.1.1(eslint@9.39.1(jiti@2.6.1))
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.2.1
       typescript:
         specifier: 5.9.2
         version: 5.9.2

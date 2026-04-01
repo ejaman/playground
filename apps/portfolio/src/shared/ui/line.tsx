@@ -4,8 +4,6 @@ type LineProps = {
 
 export function Line({ className = "" }: LineProps) {
   return (
-    <hr
-      className={`border-none border-t border-t-[rgb(0_0_0/0.1)] ${className}`}
-    />
+    <div role="separator" className={`h-px w-full bg-pure-black/10 ${className}`} />
   );
 }

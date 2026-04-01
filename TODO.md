@@ -18,10 +18,10 @@
 
 ## 🎨 Phase 2: Visual Shell (Developer Check Milestone)
 
-- [ ] **Home Layout**: 거대 타이포그래피 헤드라인 및 검색창 UI 껍데기 배치
-- [ ] **Philosophy Shell**: Pretext 스타일의 위계형 텍스트 컨테이너 시각화
-- [ ] **Projects List**: 에디토리얼 리스트 레이아웃 및 이미지 호버 영역 디자인
-- [ ] **About Grid**: 경력/스택 정보를 위한 타이포그래피 중심 그리드 설계
+- [x] **Home Layout**: 거대 타이포그래피 헤드라인 및 검색창 UI 껍데기 배치
+- [x] **Philosophy Shell**: Pretext 스타일의 위계형 텍스트 컨테이너 시각화
+- [x] **Projects List**: 에디토리얼 리스트 레이아웃 및 이미지 호버 영역 디자인
+- [x] **About Grid**: 경력/스택 정보를 위한 타이포그래피 중심 그리드 설계
 - [ ] **[Check]**: 전체 시안의 에디토리얼 감도 및 8pt 그리드 정합성 확인
 
 ## ✍️ Phase 3: Content & Narrative

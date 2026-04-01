@@ -47,7 +47,8 @@ export function HeroSection() {
         <Line className="my-sm" />
 
         <div className="pb-lg md:grid md:grid-cols-5 md:items-start md:pb-xl">
-          <div className="md:col-span-3">
+          {/* pt-[32px]: HeroCanvas의 padYTop과 맞춤 */}
+          <div className="md:col-span-3 md:pt-[32px]">
             <ChatTrigger />
           </div>
           <div className="hidden md:col-span-2 md:block">

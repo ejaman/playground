@@ -40,7 +40,9 @@ export function ProjectItem({ project, isOpen, onToggle }: Props) {
       >
         <div className="flex items-baseline gap-sm">
           <span className="text-label-sm text-neutral-800/40">{id}</span>
-          <span className="text-headline-md">{title}</span>
+          <span className="text-[24px] font-bold uppercase leading-tight tracking-[-0.02em]">
+            {title}
+          </span>
         </div>
         <div className="flex items-center gap-sm">
           <span className="hidden text-label-sm md:block">{category}</span>
@@ -51,7 +53,7 @@ export function ProjectItem({ project, isOpen, onToggle }: Props) {
       {isOpen && (
         <div className="[margin-inline:-24px] border-t border-neutral-200 px-sm py-md">
           <Markdown>{description ?? ""}</Markdown>
-          <div className="mt-md flex flex-wrap items-center gap-x-lg gap-y-sm">
+          <div className="mt-lg border-t border-neutral-100 pt-md flex flex-wrap items-center gap-x-lg gap-y-sm">
             <span className="text-label-sm text-neutral-800/40">{year}</span>
             <div className="flex flex-wrap gap-xs">
               {tech.map((t) => (

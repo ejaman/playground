@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 /** **bold**, `code`, [text](url), - list, \n 을 지원하는 경량 마크다운 렌더러 */
 
@@ -67,7 +67,17 @@ export function Markdown({ children }: { children: string }) {
   for (const line of lines) {
     const trimmed = line.trimStart();
 
-    if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+    if (trimmed.startsWith("## ")) {
+      flushList();
+      while (nodes.length > 0 && (nodes[nodes.length - 1] as React.ReactElement)?.type === "br") {
+        nodes.pop();
+      }
+      nodes.push(
+        <p key={key++} className="mt-sm mb-xs text-label-sm uppercase tracking-widest text-neutral-800/40">
+          {trimmed.slice(3)}
+        </p>,
+      );
+    } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
       listItems.push(
         <li key={key++} className="flex gap-xs">
           <span className="select-none text-neutral-800/40">—</span>
@@ -79,7 +89,7 @@ export function Markdown({ children }: { children: string }) {
       if (trimmed === "") {
         nodes.push(<br key={key++} />);
       } else {
-        nodes.push(<p key={key++} className="mb-sm">{parseInline(trimmed)}</p>);
+        nodes.push(<p key={key++} className="mb-xs">{parseInline(trimmed)}</p>);
       }
     }
   }

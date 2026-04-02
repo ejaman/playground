@@ -135,6 +135,7 @@
   *::after {
     box-sizing: border-box;
     border-radius: 0px;
+    cursor: none !important;
   }
 
   html {

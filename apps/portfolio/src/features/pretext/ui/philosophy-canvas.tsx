@@ -23,10 +23,7 @@ export function PhilosophyCanvas() {
       const labelLH = Math.round(12 * 1.4);
       const bodyF = "700 20px Inter, sans-serif";
       const bodyLH = Math.round(20 * 1.6);
-      const monoF = '400 14px "JetBrains Mono", monospace';
-      const monoLH = Math.round(14 * 1.6);
-
-      const glyphs: RepelLayoutResult["glyphs"] = [];
+const glyphs: RepelLayoutResult["glyphs"] = [];
       const segs: RepelSeg[] = [];
 
       // ── Left: Title ── (lx=padX 시작, 오른쪽은 GAP이 자연 경계)
@@ -81,68 +78,7 @@ export function PhilosophyCanvas() {
       );
       glyphs.push(...bg);
 
-      // ── Divider + Metadata ──
-      const divY = Math.max(ly, bEndY) + 24;
-      segs.push({
-        x1: rx,
-        y1: divY,
-        x2: rx + colW,
-        y2: divY,
-        color: "rgba(255,255,255,0.2)",
-        lw: 1,
-      });
-
-      const metaY = divY + 24;
-      const halfW = Math.floor(colW / 2) - 24;
-      const outputX = rx + Math.floor(colW / 2) + 24;
-
-      const { glyphs: mlg } = layoutTextBlock(
-        ctx,
-        "METHODOLOGY",
-        rx,
-        metaY,
-        labelF,
-        "rgba(255,255,255,0.4)",
-        halfW,
-        labelLH,
-      );
-      glyphs.push(...mlg);
-      const { glyphs: mvg } = layoutTextBlock(
-        ctx,
-        philosophy.methodology,
-        rx,
-        metaY + labelLH + 4,
-        monoF,
-        "#FFFFFF",
-        halfW,
-        monoLH,
-      );
-      glyphs.push(...mvg);
-
-      const { glyphs: olg } = layoutTextBlock(
-        ctx,
-        "OUTPUT",
-        outputX,
-        metaY,
-        labelF,
-        "rgba(255,255,255,0.4)",
-        halfW,
-        labelLH,
-      );
-      glyphs.push(...olg);
-      const { glyphs: ovg } = layoutTextBlock(
-        ctx,
-        philosophy.output,
-        outputX,
-        metaY + labelLH + 4,
-        monoF,
-        "#FFFFFF",
-        halfW,
-        monoLH,
-      );
-      glyphs.push(...ovg);
-
-      return { glyphs, segs, height: metaY + monoLH + padY };
+      return { glyphs, segs, height: Math.max(ly, bEndY) + padY };
     },
     [],
   );
@@ -169,12 +105,6 @@ export function PhilosophyCanvas() {
           ))}
         </ul>
         <p>{philosophy.body}</p>
-        <dl>
-          <dt>METHODOLOGY</dt>
-          <dd>{philosophy.methodology}</dd>
-          <dt>OUTPUT</dt>
-          <dd>{philosophy.output}</dd>
-        </dl>
       </div>
       <RepelCanvas onLayout={handleLayout} />
     </>

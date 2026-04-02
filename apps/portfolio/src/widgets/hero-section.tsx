@@ -24,7 +24,7 @@ export function HeroSection() {
         <div className="mt-xs mb-sm flex items-center gap-md">
           <a
             href={`mailto:${profile.email}`}
-            className="text-label-sm text-neutral-800/60 hover:border-b hover:border-pure-black hover:text-neutral-800"
+            className="text-label-sm border-b border-transparent text-neutral-800/60 hover:border-pure-black hover:text-neutral-800"
           >
             {profile.email}
           </a>
@@ -36,7 +36,7 @@ export function HeroSection() {
                 href={profile.social[k] ?? "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-label-sm text-neutral-800/60 hover:border-b hover:border-pure-black hover:text-neutral-800"
+                className="text-label-sm border-b border-transparent text-neutral-800/60 hover:border-pure-black hover:text-neutral-800"
               >
                 {k.toUpperCase()}
               </a>

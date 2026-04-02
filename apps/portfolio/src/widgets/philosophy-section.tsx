@@ -4,11 +4,13 @@ import { PhilosophyCanvas } from "@/features/pretext";
 
 export function PhilosophySection() {
   return (
-    <section aria-label="Core Philosophy" className="bg-pure-black py-lg md:py-xl">
+    <section
+      aria-label="Core Philosophy"
+      className="bg-pure-black py-md md:py-sm"
+    >
       <Container>
         <p className="text-label-sm mb-md text-white/50">
           <span className="md:hidden">/PHILOSOPHY</span>
-          <span className="hidden md:inline">CORE PHILOSOPHY</span>
         </p>
 
         {/* ── MOBILE ── */}
@@ -24,7 +26,9 @@ export function PhilosophySection() {
           </div>
           <div className="mb-md border border-white/20 p-sm">
             <p className="text-label-sm mb-xs text-white/50">02 — EXECUTION</p>
-            <p className="text-body-base text-white/80">{philosophy.execution}</p>
+            <p className="text-body-base text-white/80">
+              {philosophy.execution}
+            </p>
           </div>
           <div className="flex items-baseline gap-sm">
             <span

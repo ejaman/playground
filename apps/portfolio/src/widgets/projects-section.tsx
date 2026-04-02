@@ -6,7 +6,7 @@ export function ProjectsSection() {
   const projects = loadProjects();
 
   return (
-    <section aria-label="Selected Archives" className="py-lg" id="projects">
+    <section aria-label="Selected Archives" className="py-md" id="projects">
       <Container>
         <div className="mb-lg">
           <div className="flex items-end justify-between md:hidden">

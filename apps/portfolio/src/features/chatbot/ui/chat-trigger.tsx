@@ -5,9 +5,22 @@ import { ChatModal } from "./chat-modal";
 
 function SearchIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      aria-hidden="true"
+    >
       <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" />
+      <line
+        x1="13.5"
+        y1="13.5"
+        x2="17"
+        y2="17"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }
@@ -38,7 +51,7 @@ export function ChatTrigger() {
         className="flex w-full cursor-pointer items-center justify-between border border-pure-black px-sm py-xs text-left hover:bg-neutral-100"
       >
         <span className="text-mono-base text-black/35">
-          Ask Jim about his experience...
+          Ask Jim about her experience...
         </span>
         <SearchIcon />
       </button>

@@ -1,23 +1,25 @@
 import { Container, Line } from "@/shared/ui";
 import { profile } from "@/content";
-
-const NAV_ITEMS = ["HOME", "PROJECTS", "BLOG", "ABOUT"] as const;
+import { NavLinks } from "./nav-links";
 
 function SearchIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      aria-hidden="true"
+    >
       <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
-function HamburgerIcon() {
-  return (
-    <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-      <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="0" y1="7" x2="22" y2="7" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="0" y1="13" x2="22" y2="13" stroke="currentColor" strokeWidth="1.5" />
+      <line
+        x1="13.5"
+        y1="13.5"
+        x2="17"
+        y2="17"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }
@@ -36,19 +38,7 @@ export function Header() {
             </span>
           </div>
 
-          <nav className="hidden items-center gap-md md:flex" aria-label="주요 메뉴">
-            {NAV_ITEMS.map((item, i) => (
-              <a
-                key={item}
-                href={item === "HOME" ? "#" : `#${item.toLowerCase()}`}
-                className={`text-label-sm hover:border-b hover:border-pure-black hover:pb-0.5 ${
-                  i === 0 ? "border-b border-pure-black pb-0.5" : ""
-                }`}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
+          <NavLinks />
 
           <div className="flex items-center gap-sm">
             <button
@@ -56,12 +46,6 @@ export function Header() {
               className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white md:hidden"
             >
               <SearchIcon />
-            </button>
-            <button
-              aria-label="메뉴 열기"
-              className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white"
-            >
-              <HamburgerIcon />
             </button>
           </div>
         </div>

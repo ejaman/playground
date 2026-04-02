@@ -8,7 +8,7 @@ import { philosophy } from "@/content";
 export function PhilosophyCanvas() {
   const handleLayout = useCallback(
     (ctx: CanvasRenderingContext2D, W: number): RepelLayoutResult => {
-      const GAP = 160; // gap-xl
+      const GAP = 140; // gap-xl
       const colW = Math.floor((W - GAP) / 2);
       const padX = 28; // repulsion 이동 공간
       const padY = 28; // 상하 이동 공간
@@ -21,9 +21,9 @@ export function PhilosophyCanvas() {
       const titleLH = Math.round(72 * 1.1);
       const labelF = '400 12px "JetBrains Mono", monospace';
       const labelLH = Math.round(12 * 1.4);
-      const bodyF = "700 20px Inter, sans-serif";
-      const bodyLH = Math.round(20 * 1.6);
-const glyphs: RepelLayoutResult["glyphs"] = [];
+      const bodyF = "700 18px Inter, sans-serif";
+      const bodyLH = Math.round(18 * 1.6);
+      const glyphs: RepelLayoutResult["glyphs"] = [];
       const segs: RepelSeg[] = [];
 
       // ── Left: Title ── (lx=padX 시작, 오른쪽은 GAP이 자연 경계)
@@ -65,18 +65,60 @@ const glyphs: RepelLayoutResult["glyphs"] = [];
         ly = pEndY + 24;
       }
 
-      // ── Right: Body ── (rx 그대로 시작, 오른쪽 캔버스 경계에서 padX 확보)
-      const { glyphs: bg, endY: bEndY } = layoutTextBlock(
-        ctx,
-        philosophy.body,
-        rx - padX * 2,
-        padY + bodyLH,
-        bodyF,
-        "#FFFFFF",
-        colW + padX,
-        bodyLH,
-      );
-      glyphs.push(...bg);
+      // ── Right: Body ── \n\n 기준으로 문단 분리 렌더링
+      const paragraphs = philosophy.body.split("\n\n");
+      const paraGap = Math.round(bodyLH * 0.75);
+      let ry = padY + bodyLH;
+      let bEndY = ry;
+      for (const para of paragraphs) {
+        const { glyphs: bg, endY } = layoutTextBlock(
+          ctx,
+          para,
+          rx - padX * 2,
+          ry,
+          bodyF,
+          "#FFFFFF",
+          colW + padX + 20,
+          bodyLH,
+        );
+        glyphs.push(...bg);
+        bEndY = endY;
+        ry = endY + paraGap;
+      }
+
+      // // ── DEBUG: body 영역 경계 표시 ──
+      // const dbgX = rx - padX * 2;
+      // const dbgW = colW;
+      // const dbgY1 = padY;
+      // const dbgY2 = bEndY;
+      // const dbgColor = "rgba(255,0,0,0.6)";
+      // segs.push(
+      //   {
+      //     x1: dbgX,
+      //     y1: dbgY1,
+      //     x2: dbgX + dbgW,
+      //     y2: dbgY1,
+      //     color: dbgColor,
+      //     lw: 1,
+      //   }, // top
+      //   {
+      //     x1: dbgX,
+      //     y1: dbgY2,
+      //     x2: dbgX + dbgW,
+      //     y2: dbgY2,
+      //     color: dbgColor,
+      //     lw: 1,
+      //   }, // bottom
+      //   { x1: dbgX, y1: dbgY1, x2: dbgX, y2: dbgY2, color: dbgColor, lw: 1 }, // left
+      //   {
+      //     x1: dbgX + dbgW,
+      //     y1: dbgY1,
+      //     x2: dbgX + dbgW,
+      //     y2: dbgY2,
+      //     color: dbgColor,
+      //     lw: 1,
+      //   }, // right
+      // );
 
       return { glyphs, segs, height: Math.max(ly, bEndY) + padY };
     },
@@ -104,7 +146,7 @@ const glyphs: RepelLayoutResult["glyphs"] = [];
             <li key={p}>{p}</li>
           ))}
         </ul>
-        <p>{philosophy.body}</p>
+        <p style={{ whiteSpace: "pre-wrap" }}>{philosophy.body}</p>
       </div>
       <RepelCanvas onLayout={handleLayout} />
     </>

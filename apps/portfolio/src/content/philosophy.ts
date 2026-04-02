@@ -6,13 +6,13 @@ export const philosophy = {
   titleMobile: "ENGINEER'S PHILOSOPHY",
 
   /** 히어로 소개 + 철학 본문 (데스크탑 우측) */
-  body: "React와 TypeScript 기반 프론트엔드 개발자 이지민입니다. 단순한 기능 구현을 넘어, 서비스의 확장성과 유지보수성을 최우선으로 고려합니다. 오늘의 코드가 미래의 레거시라는 생각으로  가독성 좋은 코드, 더 나아가 설명이 필요 없는 구조를 지향합니다.",
+  body: "React와 TypeScript 기반 프론트엔드 개발자 이지민입니다. \n\n단순한 기능 구현을 넘어, 서비스의 확장성과 유지보수성을 최우선으로 고려합니다. 오늘의 코드가 미래의 레거시라는 생각으로 가독성 좋은 코드, 더 나아가 설명이 필요 없는 구조를 지향합니다.\n\n적극적인 소통과 피드백 수용이 더 나은 결과물을 만든다고 믿으며, 함께 성장하는 건강한 개발 문화를 만들고 싶습니다.",
 
   /** 데스크탑 좌측 원칙 목록 */
   principles: [
-    "CODE IS WRITTEN ONCE, BUT READ A HUNDRED TIMES. / 코드는 한 번 쓰지만, 백 번 읽힌다. 나는 항상 읽는 사람의 입장에서 쓴다.",
+    "CODE IS WRITTEN ONCE, BUT READ A HUNDRED TIMES. / 코드는 한 번 쓰지만, 백 번 읽힌다.",
     "NAMING IS NOT DECORATION, IT IS DESIGN. / 이름 하나, 구조 하나가 주석 열 줄보다 낫다. 좋은 네이밍은 문서보다 강하다.",
-    "DON'T PASS TODAY'S COMPLEXITY TO TOMORROW'S DEVELOPER. / 오늘의 복잡함을 내일의 누군가에게 떠넘기지 않는다. 그 누군가는 대부분 미래의 나다.",
+    "DON'T PASS TODAY'S COMPLEXITY TO TOMORROW'S DEVELOPER. / 오늘의 복잡함을 내일의 누군가에게 떠넘기지 않는다.",
   ],
 
   /** 모바일 01 — CONTEXT 인용구 */

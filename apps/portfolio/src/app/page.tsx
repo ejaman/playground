@@ -21,7 +21,7 @@ export default function PortfolioPage() {
           Mobile: 단일 컬럼 / Desktop: 2fr + 1fr */}
       <section aria-label="Writing and About" className="py-lg" id="blog">
         <Container>
-          <Line className="mb-xl" />
+          {/* <Line className="mb-xl" /> */}
           <div className="flex flex-col gap-xl md:grid md:grid-cols-[2fr_1fr]">
             <WritingSection />
             <AboutSection />

@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SIZE = 8;
 
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // 터치 디바이스(모바일)에서는 커서 비활성화
+    // 터치 디바이스(모바일)에서는 렌더링하지 않음
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    setVisible(true);
 
     let rafId: number;
     let x = -100;
@@ -35,6 +37,8 @@ export function CustomCursor() {
       cancelAnimationFrame(rafId);
     };
   }, []);
+
+  if (!visible) return null;
 
   return (
     <div

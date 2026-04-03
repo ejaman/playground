@@ -120,30 +120,21 @@ export function ChatModal({ onClose }: ChatModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"
+      className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 md:items-center"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label="System Query"
-        className="flex w-full max-w-[48rem] flex-col bg-pure-black text-pure-white"
-        style={{ maxHeight: "85vh" }}
+        className="flex w-full max-w-[48rem] flex-col bg-pure-black text-pure-white md:max-h-[85vh]"
+        style={{ maxHeight: "100dvh" }}
       >
         {/* ── Title bar ─────────────────────────────────────── */}
         <div className="flex items-center justify-between border-b border-white/20 px-sm py-xs">
-          <div className="flex items-center gap-xs">
-            <span
-              className="inline-block h-3 w-3 bg-white/30"
-              aria-hidden="true"
-            />
-            <span
-              className="inline-block h-3 w-3 bg-white/30"
-              aria-hidden="true"
-            />
-            <span
-              className="inline-block h-3 w-3 bg-white/30"
-              aria-hidden="true"
-            />
+          <div className="hidden items-center gap-xs md:flex">
+            <span className="inline-block h-3 w-3 bg-white/30" aria-hidden="true" />
+            <span className="inline-block h-3 w-3 bg-white/30" aria-hidden="true" />
+            <span className="inline-block h-3 w-3 bg-white/30" aria-hidden="true" />
           </div>
           <span className="text-label-sm text-white/60">
             SYSTEM_QUERY // EXPERIENCE_RETRIEVAL
@@ -174,7 +165,7 @@ export function ChatModal({ onClose }: ChatModalProps) {
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Query Jimin's experience..."
-                className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-white/30"
+                className="w-full bg-transparent text-base text-pure-white outline-none placeholder:text-white/30 md:text-mono-base"
               />
             </div>
           ) : (
@@ -219,7 +210,7 @@ export function ChatModal({ onClose }: ChatModalProps) {
                     onChange={(e) => setDraft(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="AWAITING_INPUT..."
-                    className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-white/30"
+                    className="w-full bg-transparent text-base text-pure-white outline-none placeholder:text-white/30 md:text-mono-base"
                   />
                 </div>
               )}

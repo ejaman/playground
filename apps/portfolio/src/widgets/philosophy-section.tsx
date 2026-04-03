@@ -15,30 +15,22 @@ export function PhilosophySection() {
 
         {/* ── MOBILE ── */}
         <div className="md:hidden">
-          <h2 className="text-display-lg mb-md text-pure-white">
-            {philosophy.titleMobile}
+          <h2 className="mb-md text-[40px] font-bold leading-tight text-pure-white">
+            {philosophy.title}
           </h2>
-          <div className="mb-md border-l-2 border-pure-white pl-sm">
-            <p className="text-label-sm mb-xs text-white/50">01 — CONTEXT</p>
-            <p className="text-body-intro italic text-pure-white">
-              &ldquo;{philosophy.quote}&rdquo;
-            </p>
-          </div>
-          <div className="mb-md border border-white/20 p-sm">
-            <p className="text-label-sm mb-xs text-white/50">02 — EXECUTION</p>
-            <p className="text-body-base text-white/80">
-              {philosophy.execution}
-            </p>
-          </div>
-          <div className="flex items-baseline gap-sm">
-            <span
-              className="font-bold leading-none text-white/20"
-              style={{ fontSize: "96px" }}
-              aria-hidden="true"
-            >
-              03
-            </span>
-            <p className="text-label-sm text-white/60">{philosophy.slogan}</p>
+          <ul className="mb-md flex flex-col gap-sm">
+            {philosophy.principles.map((p) => (
+              <li key={p} className="border-l-2 border-pure-white pl-sm">
+                <p className="text-label-sm text-white/80">{p}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-col gap-sm">
+            {philosophy.body.split("\n\n").map((para, i) => (
+              <p key={i} className="text-body-base font-bold text-pure-white">
+                {para}
+              </p>
+            ))}
           </div>
         </div>
 

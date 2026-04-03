@@ -16,12 +16,6 @@ export function ProjectsSection() {
               </p>
               <p className="text-headline-md">ARCHIVE</p>
             </div>
-            <a
-              href="#"
-              className="text-label-sm border-b border-pure-black pb-0.5"
-            >
-              VIEW ALL ({projects.length})
-            </a>
           </div>
         </div>
         <Line />

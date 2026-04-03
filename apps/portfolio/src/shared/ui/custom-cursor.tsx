@@ -8,6 +8,9 @@ export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // 터치 디바이스(모바일)에서는 커서 비활성화
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     let rafId: number;
     let x = -100;
     let y = -100;

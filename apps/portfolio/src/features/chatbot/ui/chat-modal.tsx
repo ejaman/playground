@@ -33,11 +33,17 @@ export function ChatModal({ onClose }: ChatModalProps) {
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  // 모달 열려있는 동안 body 스크롤 차단
+  // 모달 열려있는 동안 body 스크롤 차단 (iOS 포함)
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
     };
   }, []);
 

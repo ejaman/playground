@@ -126,8 +126,7 @@ export function ChatModal({ onClose }: ChatModalProps) {
         role="dialog"
         aria-modal="true"
         aria-label="System Query"
-        className="flex w-full max-w-[48rem] flex-col bg-pure-black text-pure-white md:max-h-[85vh]"
-        style={{ maxHeight: "100dvh" }}
+        className="flex h-dvh w-full max-w-[48rem] flex-col bg-pure-black text-pure-white md:h-auto md:max-h-[85vh]"
       >
         {/* ── Title bar ─────────────────────────────────────── */}
         <div className="flex items-center justify-between border-b border-white/20 px-sm py-xs">

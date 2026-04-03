@@ -14,6 +14,17 @@ on:
       - "package.json"
       - "pnpm-lock.yaml"
       - "turbo.json"
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "배포 대상 (blog / portfolio / all)"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - blog
+          - portfolio
 
 jobs:
   Check:
@@ -47,10 +58,14 @@ jobs:
     env:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BLOG }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Check blog-related changes
         id: filter
         uses: dorny/paths-filter@v3
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           filters: |
             blog:
               - "apps/blog/**"
@@ -59,36 +74,32 @@ jobs:
               - "pnpm-lock.yaml"
               - "turbo.json"
 
-      - name: Checkout Repository
-        if: steps.filter.outputs.blog == 'true'
-        uses: actions/checkout@v4
-
       - name: Install pnpm
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         uses: pnpm/action-setup@v4
         with:
           version: 10.10.0
 
       - name: Setup Node.js
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Install Vercel CLI
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         run: pnpm add -g vercel@latest
 
       - name: Pull Vercel Environment Information
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
-        if: steps.filter.outputs.blog == 'true'
+        if: steps.filter.outputs.blog == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'blog' || github.event.inputs.target == 'all'))
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
   Deploy-Portfolio:
@@ -97,10 +108,14 @@ jobs:
     env:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PORTFOLIO }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Check portfolio-related changes
         id: filter
         uses: dorny/paths-filter@v3
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           filters: |
             portfolio:
               - "apps/portfolio/**"
@@ -109,34 +124,30 @@ jobs:
               - "pnpm-lock.yaml"
               - "turbo.json"
 
-      - name: Checkout Repository
-        if: steps.filter.outputs.portfolio == 'true'
-        uses: actions/checkout@v4
-
       - name: Install pnpm
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         uses: pnpm/action-setup@v4
         with:
           version: 10.10.0
 
       - name: Setup Node.js
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Install Vercel CLI
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         run: pnpm add -g vercel@latest
 
       - name: Pull Vercel Environment Information
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
-        if: steps.filter.outputs.portfolio == 'true'
+        if: steps.filter.outputs.portfolio == 'true' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.target == 'portfolio' || github.event.inputs.target == 'all'))
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

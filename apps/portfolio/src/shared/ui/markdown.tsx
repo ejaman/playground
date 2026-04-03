@@ -47,7 +47,16 @@ function parseInline(text: string): ReactNode[] {
   return result;
 }
 
-export function Markdown({ children }: { children: string }) {
+export function Markdown({
+  children,
+  variant = "light",
+}: {
+  children: string;
+  variant?: "light" | "dark";
+}) {
+  const mutedColor =
+    variant === "dark" ? "text-white/40" : "text-neutral-800/40";
+
   const lines = children.split("\n");
   const nodes: ReactNode[] = [];
   let listItems: ReactNode[] = [];
@@ -73,14 +82,14 @@ export function Markdown({ children }: { children: string }) {
         nodes.pop();
       }
       nodes.push(
-        <p key={key++} className="mt-sm mb-xs text-label-sm uppercase tracking-widest text-neutral-800/40">
+        <p key={key++} className={`mt-sm mb-xs text-label-sm uppercase tracking-widest ${mutedColor}`}>
           {trimmed.slice(3)}
         </p>,
       );
     } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
       listItems.push(
         <li key={key++} className="flex gap-xs">
-          <span className="select-none text-neutral-800/40">—</span>
+          <span className={`select-none ${mutedColor}`}>—</span>
           <span>{parseInline(trimmed.slice(2))}</span>
         </li>,
       );

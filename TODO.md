@@ -4,8 +4,8 @@
 
 - [x] **Phase 1: System Foundation** - 프로젝트 셋팅 및 디자인 토큰 이식
 - [x] **Phase 2: Visual Shell (UI First)** - 반응형 포함 전체 UI 레이아웃 완성
-- [ ] **Phase 2.5: Content Architecture** - 단일 데이터 소스 구조 구축 및 위젯 연결
-- [ ] **Phase 3: Content Population** - 실제 포트폴리오 데이터 입력
+- [x] **Phase 2.5: Content Architecture** - 단일 데이터 소스 구조 구축 및 위젯 연결
+- [x] **Phase 3: Content Population** - 실제 포트폴리오 데이터 입력
 - [ ] **Phase 4: Intelligence & Logic** - AI 챗봇 및 Pretext 렌더러 기능 구현
 - [ ] **Phase 5: Audit & Launch** - 성능 최적화 및 배포
 
@@ -34,21 +34,23 @@
 
 - [x] **데이터 구조 설계**: `src/content/` TypeScript 파일 및 `src/entities/` 타입 정의
 - [x] **위젯 연결**: 모든 위젯의 플레이스홀더를 `@/content` import로 교체
-- [ ] **✏️ 실제 데이터 입력** ← 개발자 직접 작성 필요
-  - [ ] `src/content/profile.ts` — 이름, 타이틀, 소개 문구, 소셜 링크
-  - [ ] `src/content/projects.ts` — 프로젝트 목록 및 상세 설명
-  - [ ] `src/content/experience.ts` — 경력, 수상, 가용 상태
-  - [ ] `src/content/skills.ts` — 기술 스택 (FE/BE/Core)
-  - [ ] `src/content/philosophy.ts` — 철학 텍스트 및 원칙 문구
+- [x] **✏️ 실제 데이터 입력**
+  - [x] `src/content/profile.ts` — 이름, 타이틀, 소개 문구, 소셜 링크
+  - [x] `src/content/projects.ts` — 프로젝트 목록 및 상세 설명
+  - [x] `src/content/experience.ts` — 경력, 수상, 가용 상태
+  - [x] `src/content/skills.ts` — 기술 스택 (FE/BE/Core)
+  - [x] `src/content/philosophy.ts` — 철학 텍스트 및 원칙 문구
 
 ## ✍️ Phase 3: Content & Narrative
 
-- [ ] **Philosophy Content**: Pretext 구조에 맞춘 엔지니어링 가치관 텍스트 최종 다듬기
-- [ ] **AI Context**: `src/content/` 파일들을 Claude RAG 컨텍스트용 마크다운으로 직렬화
+- [x] **Philosophy Content**: Pretext 구조에 맞춘 엔지니어링 가치관 텍스트 최종 다듬기
+- [x] **AI Context**: `src/content/chatbot-context.ts` — Claude RAG 컨텍스트 데이터 작성 완료
 
 ## 🧠 Phase 4: Intelligence & Functional Logic
 
 - [ ] **Pretext Dynamic Renderer**: 계층 구조 파싱 로직 및 순차적 타이핑 애니메이션 구현
+  - [x] PhilosophyCanvas 문단별 렌더링 + mouse repulsion effect (326b3a1)
+  - [ ] 순차적 타이핑 애니메이션 구현 (미완)
 - [ ] **AI Agent Integration**:
   - [ ] Anthropic SDK 연동 및 `/api/chat` Route Handler 구축
   - [ ] **Context Injection**: 서버 사이드 `src/content/` 데이터 → Claude System Prompt 주입
@@ -73,6 +75,18 @@
 
 **Phase 2.5 완료 (구조)**: `src/content/` 단일 데이터 소스 구조 구축 및 위젯 연결
 - 실제 데이터 입력은 개발자가 `src/content/*.ts` 파일을 직접 수정
+
+### 2026-04-02 ~ 2026-04-03
+
+**Phase 2.5 완료 (데이터)**: profile/experience/skills/philosophy/projects 실제 데이터 교체
+
+**Phase 3 완료**: philosophy 텍스트 완성 + `chatbot-context.ts` RAG 컨텍스트 작성
+
+**Phase 4 부분 완료**:
+- projects accordion + MD content 구조화 + Markdown 렌더러 개선 (125ae70, 833b025)
+- PhilosophyCanvas 문단 렌더링 + mouse repulsion effect (326b3a1, b25f2d3)
+- MonogramCanvas repulsion effect + RepelCanvas 공용 컴포넌트 추출 (a90f21e, 59b7e25)
+- 미완: Pretext 순차적 타이핑 애니메이션, AI Anthropic SDK 연동
 
 ---
 

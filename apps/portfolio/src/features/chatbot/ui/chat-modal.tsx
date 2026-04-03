@@ -1,45 +1,30 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Markdown } from "@/shared/ui/markdown";
 
-// ─── Mock data (Phase 4에서 실제 AI 스트리밍으로 교체) ─────────────────────
-const MOCK = {
-  resultLabel: "PROMPT_RESULT_01 //",
-  body: `Jim operates at the intersection of high-end editorial aesthetics and robust digital systems. With over 8 years in the field, he has transitioned from pure graphic design into system-led UI architecture.`,
-  competencies: [
-    { skill: "Editorial Layout", pct: "100%" },
-    { skill: "Design Systems", pct: "95%" },
-    { skill: "Technical SEO", pct: "80%" },
-    { skill: "Creative Direction", pct: "90%" },
-  ],
-  milestones: [
-    "2024: Principal @ JIM_EDITORIAL",
-    "2022: Lead Architect at VECTOR_FLOW",
-    "2019: Senior Designer at MONO_GRID",
-    "2017: BA Graphic Arts (Pratt)",
-  ],
-  conclusion:
-    "Recommendation: Proceed with recruitment for high-complexity visual systems requiring a balance of artistic rigor and technical scalability.",
+type Message = {
+  role: "user" | "assistant";
+  content: string;
 };
-
-type ModalState = { phase: "idle" } | { phase: "responded"; query: string };
 
 type ChatModalProps = {
   onClose: () => void;
 };
 
 export function ChatModal({ onClose }: ChatModalProps) {
-  const [state, setState] = useState<ModalState>({ phase: "idle" });
+  const [history, setHistory] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
+  const [streaming, setStreaming] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
-  // 열릴 때 input 포커스
   useEffect(() => {
     inputRef.current?.focus();
-  }, []);
+  }, [streaming]);
 
-  // Escape 닫기
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -48,12 +33,73 @@ export function ChatModal({ onClose }: ChatModalProps) {
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const handleSubmit = () => {
+  // 모달 열려있는 동안 body 스크롤 차단
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  // 새 메시지 추가 시 스크롤 하단 유지
+  useEffect(() => {
+    bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight });
+  }, [history, streaming]);
+
+  const handleSubmit = async () => {
     const q = draft.trim();
-    if (!q) return;
-    // Phase 4: API 호출로 교체
-    setState({ phase: "responded", query: q });
+    if (!q || streaming) return;
+
     setDraft("");
+    setError(null);
+
+    const newHistory: Message[] = [...history, { role: "user", content: q }];
+    setHistory(newHistory);
+    setStreaming(true);
+
+    // assistant 자리 미리 추가
+    setHistory((prev) => [...prev, { role: "assistant", content: "" }]);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: q,
+          history: history, // 이전 히스토리 (새 user 메시지 제외)
+        }),
+      });
+
+      if (!res.ok) throw new Error(`API Error: ${res.status}`);
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) throw new Error("Stream unavailable");
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const text = decoder.decode(value);
+        setHistory((prev) => {
+          const updated = [...prev];
+          const last = updated[updated.length - 1];
+          if (last?.role === "assistant") {
+            updated[updated.length - 1] = {
+              ...last,
+              content: last.content + text,
+            };
+          }
+          return updated;
+        });
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Unknown error");
+      // 빈 assistant 메시지 제거
+      setHistory((prev) => prev.slice(0, -1));
+    } finally {
+      setStreaming(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -81,15 +127,15 @@ export function ChatModal({ onClose }: ChatModalProps) {
         <div className="flex items-center justify-between border-b border-white/20 px-sm py-xs">
           <div className="flex items-center gap-xs">
             <span
-              className={`inline-block h-3 w-3 bg-white/30`}
-              aria-hidden="true"
-            />{" "}
-            <span
-              className={`inline-block h-3 w-3 bg-white/30`}
+              className="inline-block h-3 w-3 bg-white/30"
               aria-hidden="true"
             />
             <span
-              className={`inline-block h-3 w-3 bg-white/30`}
+              className="inline-block h-3 w-3 bg-white/30"
+              aria-hidden="true"
+            />
+            <span
+              className="inline-block h-3 w-3 bg-white/30"
               aria-hidden="true"
             />
           </div>
@@ -99,16 +145,19 @@ export function ChatModal({ onClose }: ChatModalProps) {
           <button
             onClick={onClose}
             aria-label="닫기"
-            className="text-label-sm text-white/60 hover:text-pure-white"
+            className="text-xl leading-none text-white/60 hover:text-pure-white"
           >
             ×
           </button>
         </div>
 
         {/* ── Body (scrollable) ─────────────────────────────── */}
-        <div className="flex-1 overflow-y-auto p-sm font-[family-name:var(--font-mono)]">
-          {state.phase === "idle" ? (
-            /* 입력 대기 상태 */
+        <div
+          ref={bodyRef}
+          className="flex-1 overflow-y-auto p-sm font-[family-name:var(--font-mono)]"
+        >
+          {history.length === 0 ? (
+            /* 초기 상태 */
             <div className="flex items-start gap-xs">
               <span className="text-mono-base text-white/60 shrink-0">
                 &gt;
@@ -118,88 +167,67 @@ export function ChatModal({ onClose }: ChatModalProps) {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Query Jim's experience..."
+                placeholder="Query Jimin's experience..."
                 className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-white/30"
               />
             </div>
           ) : (
-            /* 응답 상태 */
             <div className="flex flex-col gap-md">
-              {/* User query */}
-              <p className="text-mono-base">
-                <span className="text-white/50">&gt; USER_QUERY: </span>
-                <span className="text-pure-white">&quot;{state.query}&quot;</span>
-              </p>
-
-              {/* Result label + body */}
-              <div>
-                <p className="text-label-sm mb-sm text-white/50">
-                  {MOCK.resultLabel}
-                </p>
-                <p className="text-[18px] leading-relaxed text-pure-white">
-                  {MOCK.body}
-                </p>
-              </div>
-
-              {/* Data panels */}
-              <div className="grid grid-cols-2 gap-sm">
-                <div className="border border-white/20 p-sm">
-                  <p className="text-label-sm mb-sm text-white/60">
-                    ⁃: CORE_COMPETENCIES
+              {history.map((msg, i) =>
+                msg.role === "user" ? (
+                  <p key={i} className="text-mono-base">
+                    <span className="text-white/50">&gt; USER_QUERY: </span>
+                    <span className="text-pure-white">
+                      &quot;{msg.content}&quot;
+                    </span>
                   </p>
-                  <ul className="flex flex-col gap-xs">
-                    {MOCK.competencies.map(({ skill, pct }) => (
-                      <li
-                        key={skill}
-                        className="text-mono-base flex justify-between"
-                      >
-                        <span>{skill}</span>
-                        <span className="text-white/60">{pct}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="border border-white/20 p-sm">
-                  <p className="text-label-sm mb-sm text-white/60">
-                    ◎ MILESTONES
-                  </p>
-                  <ul className="flex flex-col gap-xs">
-                    {MOCK.milestones.map((m) => (
-                      <li key={m} className="text-mono-base">
-                        {m}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+                ) : (
+                  <div key={i}>
+                    <p className="text-label-sm mb-sm text-white/50">
+                      PROMPT_RESULT_
+                      {String(Math.ceil((i + 1) / 2)).padStart(2, "0")} //
+                    </p>
+                    <div className="text-[18px] leading-relaxed text-pure-white">
+                      <Markdown variant="dark">{msg.content}</Markdown>
+                      {streaming && i === history.length - 1 && (
+                        <span className="animate-pulse">▌</span>
+                      )}
+                    </div>
+                  </div>
+                ),
+              )}
 
-              {/* Conclusion */}
-              <div>
-                <p className="text-label-sm mb-xs text-white/50">
-                  CONCLUSION //
-                </p>
-                <p className="text-mono-base italic text-white/80">
-                  {MOCK.conclusion}
-                </p>
-              </div>
+              {/* 에러 */}
+              {error && (
+                <p className="text-mono-base text-red-400">ERROR // {error}</p>
+              )}
 
-              {/* Awaiting cursor */}
-              <div className="flex items-center gap-xs text-white/40">
-                <span className="animate-pulse text-lg leading-none">▌</span>
-                <span className="text-label-sm">AWAITING_INPUT...</span>
-              </div>
+              {/* 다음 입력창 */}
+              {!streaming && (
+                <div className="flex items-start gap-xs">
+                  <span className="text-mono-base text-white/60 shrink-0">
+                    &gt;
+                  </span>
+                  <input
+                    ref={inputRef}
+                    value={draft}
+                    onChange={(e) => setDraft(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="AWAITING_INPUT..."
+                    className="text-mono-base w-full bg-transparent text-pure-white outline-none placeholder:text-white/30"
+                  />
+                </div>
+              )}
+
+              {/* 스트리밍 중 로딩 표시 */}
+              {streaming && history[history.length - 1]?.content === "" && (
+                <div className="flex items-center gap-xs text-white/40">
+                  <span className="animate-pulse text-lg leading-none">▌</span>
+                  <span className="text-label-sm">PROCESSING...</span>
+                </div>
+              )}
             </div>
           )}
-        </div>
-
-        {/* ── Footer actions ────────────────────────────────── */}
-        <div className="grid grid-cols-2 border-t border-white/20">
-          <button className="text-label-sm flex items-center justify-center gap-xs border-r border-white/20 py-sm text-white/60 hover:bg-white/10 hover:text-pure-white">
-            <span aria-hidden="true">↓</span> DOWNLOAD_CV.PDF
-          </button>
-          <button className="text-label-sm flex items-center justify-center gap-xs py-sm text-white/60 hover:bg-white/10 hover:text-pure-white">
-            <span aria-hidden="true">✉</span> REACH_OUT
-          </button>
         </div>
       </div>
     </div>

@@ -53,7 +53,17 @@ export function ProjectItem({ project, isOpen, onToggle }: Props) {
       {isOpen && (
         <div className="[margin-inline:-24px] border-t border-neutral-200 px-sm py-md">
           <Markdown>{description ?? ""}</Markdown>
-          <div className="mt-lg border-t border-neutral-100 pt-md flex flex-wrap items-center gap-x-lg gap-y-sm">
+          {link && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-label-sm border-b border-pure-black pb-0.5"
+            >
+              더보기 →
+            </a>
+          )}
+          <div className="mt-lg border-t border-neutral-100 pt-sm flex flex-wrap items-center gap-x-lg gap-y-sm">
             <span className="text-label-sm text-neutral-800/40">{year}</span>
             <div className="flex flex-wrap gap-xs">
               {tech.map((t) => (
@@ -65,16 +75,6 @@ export function ProjectItem({ project, isOpen, onToggle }: Props) {
                 </span>
               ))}
             </div>
-            {link && (
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-label-sm border-b border-pure-black pb-0.5"
-              >
-                VISIT →
-              </a>
-            )}
           </div>
         </div>
       )}

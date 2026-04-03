@@ -13,7 +13,7 @@ export const projects: ProjectT[] = [
     category: "LEGACY MODERNIZATION",
     year: "2025",
     tech: ["Next.js 16", "TypeScript", "TanStack Query", "Turborepo"],
-    link: null,
+    link: "https://unleashed-television-864.notion.site/327339b1f8a780cfaf09e45504e4a0d7?pvs=74",
   },
   {
     id: "002",
@@ -27,7 +27,7 @@ export const projects: ProjectT[] = [
       "Redux Toolkit",
       "Styled-Components",
     ],
-    link: null,
+    link: "https://unleashed-television-864.notion.site/327339b1f8a7802e8886cb1d0a735a53?pvs=74",
   },
   {
     id: "003",
@@ -35,6 +35,6 @@ export const projects: ProjectT[] = [
     category: "CONTENT SYSTEM",
     year: "2024",
     tech: ["React", "TypeScript", "Zustand", "Vite", "Styled-Components"],
-    link: null,
+    link: "https://unleashed-television-864.notion.site/327339b1f8a78038897ae989d73a1019?pvs=74",
   },
 ];

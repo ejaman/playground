@@ -2,28 +2,6 @@ import { Container, Line } from "@/shared/ui";
 import { profile } from "@/content";
 import { NavLinks } from "./nav-links";
 
-function SearchIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-      <line
-        x1="13.5"
-        y1="13.5"
-        x2="17"
-        y2="17"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
-
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-pure-white">
@@ -39,15 +17,6 @@ export function Header() {
           </div>
 
           <NavLinks />
-
-          <div className="flex items-center gap-sm">
-            <button
-              aria-label="검색"
-              className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white md:hidden"
-            >
-              <SearchIcon />
-            </button>
-          </div>
         </div>
       </Container>
       <Line />

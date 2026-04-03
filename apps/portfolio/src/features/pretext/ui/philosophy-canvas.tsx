@@ -78,7 +78,7 @@ export function PhilosophyCanvas() {
           ry,
           bodyF,
           "#FFFFFF",
-          colW + padX + 20,
+          colW,
           bodyLH,
         );
         glyphs.push(...bg);

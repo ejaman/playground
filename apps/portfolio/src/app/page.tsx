@@ -1,4 +1,4 @@
-import { Container, Line } from "@/shared/ui";
+import { Container } from "@/shared/ui";
 import {
   Header,
   HeroSection,

@@ -184,8 +184,7 @@ export function ChatModal({ onClose }: ChatModalProps) {
                 ) : (
                   <div key={i}>
                     <p className="text-label-sm mb-sm text-white/50">
-                      PROMPT_RESULT_
-                      {String(Math.ceil((i + 1) / 2)).padStart(2, "0")} //
+                      {`PROMPT_RESULT_${String(Math.ceil((i + 1) / 2)).padStart(2, "0")} //`}
                     </p>
                     <div className="text-[18px] leading-relaxed text-pure-white">
                       <Markdown variant="dark">{msg.content}</Markdown>

@@ -29,15 +29,6 @@ export default function PortfolioPage() {
         </Container>
       </section>
 
-      {/* Mobile only: LOAD MORE */}
-      <div className="pb-lg md:hidden">
-        <Container>
-          <button className="text-label-sm w-full border border-pure-black py-md hover:bg-pure-black hover:text-pure-white">
-            LOAD MORE
-          </button>
-        </Container>
-      </div>
-
       <Footer />
     </>
   );

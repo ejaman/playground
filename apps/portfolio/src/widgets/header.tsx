@@ -39,15 +39,6 @@ export function Header() {
           </div>
 
           <NavLinks />
-
-          <div className="flex items-center gap-sm">
-            <button
-              aria-label="검색"
-              className="cursor-pointer p-1 hover:bg-pure-black hover:text-pure-white md:hidden"
-            >
-              <SearchIcon />
-            </button>
-          </div>
         </div>
       </Container>
       <Line />

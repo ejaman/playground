@@ -22,6 +22,6 @@ export const profile = {
   /** 소셜 링크 — 미사용 항목은 null */
   social: {
     blog: "https://velog.io/@ejaman/posts" as string | null,
-    github: "https://velog.io/@ejaman/posts" as string | null,
+    github: "https://github.com/ejaman" as string | null,
   },
 } as const;

@@ -78,6 +78,46 @@ export function layoutTextBlock(
   return { glyphs, endY: baseline };
 }
 
+/**
+ * canvas measureText 기반 줄 바꿈 레이아웃.
+ * @chenglou/pretext의 layoutWithLines 대신 사용하면 측정 일관성을 보장한다.
+ * 줄 바꿈과 glyph 배치가 모두 canvas measureText를 사용하므로
+ * 한글/영문 혼합 텍스트에서도 clipping이 발생하지 않는다.
+ */
+export function layoutTextBlockNative(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  firstBaseline: number,
+  font: string,
+  color: string,
+  maxWidth: number,
+  lineHeight: number,
+): { glyphs: RepelGlyph[]; endY: number } {
+  ctx.font = font;
+  const chars = [...text]; // unicode-safe split
+  const lines: string[] = [];
+  let current = "";
+  for (const ch of chars) {
+    const test = current + ch;
+    if (ctx.measureText(test).width > maxWidth && current !== "") {
+      lines.push(current);
+      current = ch;
+    } else {
+      current = test;
+    }
+  }
+  if (current) lines.push(current);
+
+  const glyphs: RepelGlyph[] = [];
+  let baseline = firstBaseline;
+  for (const line of lines) {
+    glyphs.push(...measureGlyphs(ctx, line, x, baseline, font, color));
+    baseline += lineHeight;
+  }
+  return { glyphs, endY: baseline };
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 type RepelCanvasProps = {

@@ -4,9 +4,8 @@ import { CustomCursor } from "@/shared/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "JIM — Digital Curator",
-  description:
-    "A digital curator focused on architecting high-performance interfaces and robust technical systems.",
+  title: "JIM | Frontend Dev",
+  description: "프론트엔드 개발자 이지민입니다.",
 };
 
 export default function RootLayout({

@@ -11,6 +11,8 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "@chenglou/pretext": "^0.0.3",
     "@repo/ui": "workspace:*",
     "next": "16.1.5",
     "react": "^19.2.0",
@@ -18,12 +20,15 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "^9.39.1",
     "eslint-plugin-tailwind-v4": "^1.1.1",
+    "tailwindcss": "^4.2.1",
     "typescript": "5.9.2"
   }
 }

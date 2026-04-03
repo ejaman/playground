@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@source "../**/*.{ts,tsx}";
+@source "../../../../packages/ui/src/**/*.tsx";
+
+/* ─────────────────────────────────────────────────────────
+   DESIGN TOKENS: The Monochromatic Manifesto
+   (apps/portfolio/DESIGN.md 기반)
+   ───────────────────────────────────────────────────────── */
+@theme {
+  /* ─── Colors: The Absolute Binary ─── */
+  --color-pure-white: #ffffff;
+  --color-pure-black: #000000;
+  --color-neutral-100: #f9f9f9;
+  --color-neutral-800: #1b1b1b;
+
+  /* Semantic */
+  --color-surface-base: #ffffff;
+  --color-surface-inverse: #000000;
+  --color-text-primary: #1b1b1b;
+  --color-text-inverse: #ffffff;
+
+  /* ─── Typography: The Swiss Authority ─── */
+  --font-inter: var(--font-inter);
+  --font-mono: var(--font-mono);
+
+  /* ─── Spacing: Active Negative Space (8px grid) ─── */
+  --spacing-xs: 12px;
+  --spacing-sm: 24px;
+  --spacing-md: 48px;
+  --spacing-lg: 96px;
+  --spacing-xl: 160px;
+
+  /* ─── Border Radius: 0px strict (The Absolute Rule) ─── */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-full: 0px;
+
+  /* ─── Container ─── */
+  --width-container: 1600px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES: Swiss Authority Scale
+   ───────────────────────────────────────────────────────── */
+
+/* "JIM" Logo — mobile 72px → desktop 160px */
+@utility text-huge {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 160px;
+  }
+}
+
+/* Philosophy Main Title — mobile 40px → desktop 72px */
+@utility text-display-lg {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 72px;
+  }
+}
+
+/* Project / Article Titles — mobile 28px → desktop 48px */
+@utility text-headline-md {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    font-size: 48px;
+  }
+}
+
+/* Hero Intro, Philosophy Body — 20px / weight 700 / Normal */
+@utility text-body-intro {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+/* Detailed descriptions — 16px / weight 400 / Normal */
+@utility text-body-base {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+/* Section Labels ("01 / IDENTITY") — Mono 12px / tracking 0.1em / UPPER */
+@utility text-label-sm {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Technical specifications — Mono 14px / Normal */
+@utility text-mono-base {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BASE STYLES
+   ───────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-radius: 0px;
+    cursor: none !important;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-pure-white);
+    color: var(--color-neutral-800);
+    font-family: var(--font-inter);
+  }
+
+  /* border/thin: pure-black at 10% opacity */
+  hr {
+    border: none;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+  }
+}

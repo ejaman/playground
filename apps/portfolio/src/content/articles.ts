@@ -5,7 +5,7 @@ export const articles: ArticleT[] = [
     date: "2026.04",
     title: "CLAUDE CODE로 포트폴리오 만들기",
     description: "AI와 함께 포트폴리오를 설계하고 구현한 과정의 기록.",
-    link: null, // 작성 후 추가
+    link: "https://velog.io/@ejaman/AI%EC%99%80-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EB%A7%8C%EB%93%A4%EA%B8%B0",
   },
   {
     date: "2025.11",

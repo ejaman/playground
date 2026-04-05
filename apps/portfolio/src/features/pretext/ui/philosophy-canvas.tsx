@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { RepelCanvas, layoutTextBlock } from "@/shared/ui";
+import { RepelCanvas, layoutTextBlockNative } from "@/shared/ui";
 import type { RepelLayoutResult, RepelSeg } from "@/shared/ui";
 import { philosophy } from "@/content";
 
@@ -27,7 +27,7 @@ export function PhilosophyCanvas() {
       const segs: RepelSeg[] = [];
 
       // ── Left: Title ── (lx=padX 시작, 오른쪽은 GAP이 자연 경계)
-      const { glyphs: tg, endY: tEndY } = layoutTextBlock(
+      const { glyphs: tg, endY: tEndY } = layoutTextBlockNative(
         ctx,
         philosophy.title,
         lx,
@@ -43,7 +43,7 @@ export function PhilosophyCanvas() {
       // ── Left: Principles (border-l-2) ──
       for (const p of philosophy.principles) {
         const topY = ly;
-        const { glyphs: pg, endY: pEndY } = layoutTextBlock(
+        const { glyphs: pg, endY: pEndY } = layoutTextBlockNative(
           ctx,
           p,
           lx + 16,
@@ -71,14 +71,14 @@ export function PhilosophyCanvas() {
       let ry = padY + bodyLH;
       let bEndY = ry;
       for (const para of paragraphs) {
-        const { glyphs: bg, endY } = layoutTextBlock(
+        const { glyphs: bg, endY } = layoutTextBlockNative(
           ctx,
           para,
           rx - padX * 2,
           ry,
           bodyF,
           "#FFFFFF",
-          colW + padX + 20,
+          colW,
           bodyLH,
         );
         glyphs.push(...bg);
